@@ -1,7 +1,7 @@
 % \iffalse meta-comment
 %
 % File: zref.dtx
-% Version: 2026-03-07 v2.37
+% Version: 2026-09-16 v2.38
 % Info: A new reference scheme for LaTeX
 %
 % Copyright (C)
@@ -113,7 +113,7 @@
 \input docstrip.tex
 \Msg{************************************************************************}
 \Msg{* Installation}
-\Msg{* Package: zref 2026-03-07 v2.37 A new reference scheme for LaTeX (HO)}
+\Msg{* Package: zref 2026-09-16 v2.38 A new reference scheme for LaTeX (HO)}
 \Msg{************************************************************************}
 
 \keepsilent
@@ -125,7 +125,7 @@
 This is a generated file.
 
 Project: zref
-Version: 2026-03-07 v2.37
+Version: 2026-09-16 v2.38
 
 Copyright (C)
   2006-2012 Heiko Oberdiek
@@ -232,7 +232,7 @@ and the derived files
 %<*driver>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{zref.drv}%
-  [2026-03-07 v2.37 A new reference scheme for LaTeX (HO)]%
+  [2026-09-16 v2.38 A new reference scheme for LaTeX (HO)]%
 \documentclass{ltxdoc}
 \usepackage{holtxdoc}[2011/11/22]
 \setlength{\emergencystretch}{1em}
@@ -247,7 +247,7 @@ and the derived files
 % \GetFileInfo{zref.drv}
 %
 % \title{The \xpackage{zref} package}
-% \date{2026-03-07 v2.37}
+% \date{2026-09-16 v2.38}
 % \author{Heiko Oberdiek\thanks
 % {Please report any issues at \url{https://github.com/LaTeX-Package-Repositories/zref}}}
 %
@@ -291,15 +291,20 @@ and the derived files
 % \section{Introduction}
 %
 % Standard \hologo{LaTeX}'s reference system with \cs{label}, \cs{ref},
-% and \cs{pageref} supports two properties, the appearance of
-% the counter that is last incremented by \cs{refstepcounter} and
-% the page with the \cs{label} command.
+% and \cs{pageref} now supports five properties, the appearance of
+% the counter that is last incremented by \cs{refstepcounter} 
+% (stored in \cs{@currentlabel}), 
+% the page, a title  (if it has been stored in \cs{@currentlabelname}), 
+% the current anchor 
+% (stored in \cs{@currentHref}) and an external file name if the reference is imported
+% by the \xpackage{xr} package with the \cs{label} command.
 %
-% Unhappily \hologo{LaTeX} does not provide an interface for adding
+% Unhappily for a long time \hologo{LaTeX} did provide only two properties
+% (the counter and the page) and did not provide an interface for adding
 % another properties. Packages such as \xpackage{hyperref},
-% \xpackage{nameref}, or \xpackage{titleref} are forced to
+% \xpackage{nameref}, or \xpackage{titleref} were forced to
 % use ugly hacks to extend the reference system.
-% These ugly hacks are one of the causes for \xpackage{hyperref}'s
+% These ugly hacks were one of the causes for \xpackage{hyperref}'s
 % difficulty regarding compatibility with other packages.
 %
 % \subsection{Standard \hologo{LaTeX} behaviour}
@@ -310,33 +315,37 @@ and the derived files
 %   |\section{First section on page 7} % section 2.1|\\
 %   |\label{myref}|
 % \end{quote}
-% Now \hologo{LaTeX} records the section number |2.1| and the page |7|
+% Now \hologo{LaTeX} records the section number |2.1|, the page |7|, a title
+% and an anchor (if, e.g., \xpackage{hyperref} has been loaded), 
 % in the reference. Internally the reference is a list with
-% two entries:
+% five entries:
 % \begin{quote}
-%   |\r@myref| $\rightarrow$ |{2.1}{7}|
+%   |\r@myref| $\rightarrow$ |{2.1}{7}{First section on page 7}{section.2.1}{}|
 % \end{quote}
 % The length of the list if fixed in the \hologo{LaTeX} kernel,
 % An interface for adding new properties is missing.
 %
-% There are several tries to add new properties:
+% There were several tries to add new properties:
 % \begin{description}
-% \item[\xpackage{hyperref}] uses a list of five
+% \item[\xpackage{hyperref}] used a list of five
 %   properties instead of the standard list with two entries.
-%   This causes many compatibility problems with \hologo{LaTeX} and
-%   other packages.
+%   This caused many compatibility problems with \hologo{LaTeX} and
+%   other packages, but as the \hologo{LaTeX} kernel extended the standard
+%   list to five entries too, this problem have been resolved.
 % \item[\xpackage{titleref}] stores its title data into the
-%   first entry in the list. \hologo{LaTeX} is happy because it
-%   does only see its list with two entries. The situation
-%   becomes more difficult, if more properties are added
-%   this way. Then the macros form a nested structure
+%   first entry in the list. \hologo{LaTeX} was happy because it
+%   did only see its standard list with two entries, but solution 
+%   was also not easy to extend to more fields:
+%   Then the macros form a nested structure
 %   inside the first reference argument for the label.
-%   Expandable extractions will then become painful.
+%   Expandable extractions then becomes painful.
+%   \xpackage{titleref} is not compatible with \xpackage{hyperref}
+%   and since \hologo{LaTeX} extended the number of fields it is not longer needed.  
 % \end{description}
 %
-% \subsection{Basic idea}
+% \subsection{History of the basic idea}
 %
-% Some time ago Morten H\o gholm sent me an experimental
+% Some time ago Morten Høgholm sent me an experimental
 % cross referencing mechanism as ``expl3'' code. His
 % idea is:
 % \begin{quote}
@@ -358,6 +367,10 @@ and the derived files
 % for \hologo{LaTeX3} that will need some time before its first release.
 % Thus I have implemented it as \hologo{LaTeXe} package without disturbing
 % the existing \hologo{LaTeX} reference system.
+% 
+% Note that a similar idea is now implemented in \hologo{LaTeX} directly in
+% in \xpackage{ltproperties}.
+% 
 %
 % \subsection{Interfaces}
 %
@@ -1245,6 +1258,16 @@ and the derived files
 % This option makes section and caption titles available
 % to the reference system similar to packages \xpackage{titleref}
 % or \xpackage{nameref}.
+% 
+% The module patches a number of commands to store the title in an internal variable which
+% is then exported by \cs{zlabel}.
+% 
+% If \cs{DocumentMetadata} is used, most of the patches are no longer functional, 
+% the internal variable is no longer used. Instead \cs{zlabel} will store the
+% current value of \cs{@currentlabelname}. This works with heading commands,
+% captions, and with \hologo{LaTeX} 2026-11-01 will also work with
+% theorems and item of description lists. 
+% 
 %
 % \begin{declcs}{ztitleref}
 %   \M{refname}\markbabel
@@ -1681,7 +1704,7 @@ the height difference of the two baselines is
 %<*package>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref}
-  [2026-03-07 v2.37 A new reference scheme for LaTeX (HO)]%
+  [2026-09-16 v2.38 A new reference scheme for LaTeX (HO)]%
 %    \end{macrocode}
 %
 % \subsubsection{Load basic module}
@@ -1768,7 +1791,7 @@ the height difference of the two baselines is
 %<*base>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-base}%
-  [2026-03-07 v2.37 Module base for zref (HO)]%
+  [2026-09-16 v2.38 Module base for zref (HO)]%
 %    \end{macrocode}
 %
 % \subsubsection{Utilities}
@@ -3098,7 +3121,7 @@ the height difference of the two baselines is
 %<*user>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-user}%
-  [2026-03-07 v2.37 Module user for zref (HO)]%
+  [2026-09-16 v2.38 Module user for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -3201,7 +3224,7 @@ the height difference of the two baselines is
 %<*abspage>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-abspage}%
-  [2026-03-07 v2.37 Module abspage for zref (HO)]%
+  [2026-09-16 v2.38 Module abspage for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -3253,7 +3276,7 @@ the height difference of the two baselines is
 %<*counter>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-counter}%
-  [2026-03-07 v2.37 Module counter for zref (HO)]%
+  [2026-09-16 v2.38 Module counter for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -3298,7 +3321,7 @@ the height difference of the two baselines is
 %<*lastpage>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-lastpage}%
-  [2026-03-07 v2.37 Module lastpage for zref (HO)]%
+  [2026-09-16 v2.38 Module lastpage for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \RequirePackage{zref-abspage}[2019/11/29]
 \ifx\ZREF@base@ok Y%
@@ -3382,7 +3405,7 @@ the height difference of the two baselines is
 %<*thepage>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-thepage}%
-  [2026-03-07 v2.37 Module thepage for zref (HO)]%
+  [2026-09-16 v2.38 Module thepage for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -3457,7 +3480,7 @@ the height difference of the two baselines is
 %<*nextpage>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-nextpage}%
-  [2026-03-07 v2.37 Module nextpage for zref (HO)]%
+  [2026-09-16 v2.38 Module nextpage for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -3561,7 +3584,7 @@ the height difference of the two baselines is
 %<*totpages>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-totpages}%
-  [2026-03-07 v2.37 Module totpages for zref (HO)]%
+  [2026-09-16 v2.38 Module totpages for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -3603,7 +3626,7 @@ the height difference of the two baselines is
 %<*pagelayout>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-pagelayout}%
-  [2026-03-07 v2.37 Module pagelayout for zref (HO)]%
+  [2026-09-16 v2.38 Module pagelayout for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -3834,7 +3857,7 @@ the height difference of the two baselines is
 %<*pageattr>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-pageattr}%
-  [2026-03-07 v2.37 Module pageattr for zref (HO)]%
+  [2026-09-16 v2.38 Module pageattr for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -4065,7 +4088,7 @@ the height difference of the two baselines is
 %<*marks>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-marks}%
-  [2026-03-07 v2.37 Module marks for zref (HO)]%
+  [2026-09-16 v2.38 Module marks for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -4171,7 +4194,7 @@ the height difference of the two baselines is
 %<*runs>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-runs}%
-  [2026-03-07 v2.37 Module runs for zref (HO)]%
+  [2026-09-16 v2.38 Module runs for zref (HO)]%
 %    \end{macrocode}
 %
 %    \begin{macro}{\zruns}
@@ -4203,7 +4226,7 @@ the height difference of the two baselines is
 %<*perpage>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-perpage}%
-  [2026-03-07 v2.37 Module perpage for zref (HO)]%
+  [2026-09-16 v2.38 Module perpage for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -4406,7 +4429,7 @@ the height difference of the two baselines is
 %<*titleref>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-titleref}%
-  [2026-03-07 v2.37 Module titleref for zref (HO)]%
+  [2026-09-16 v2.38 Module titleref for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -4852,7 +4875,7 @@ the height difference of the two baselines is
 %<*xr>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-xr}%
-  [2026-03-07 v2.37 Module xr for zref (HO)]%
+  [2026-09-16 v2.38 Module xr for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -5388,7 +5411,7 @@ the height difference of the two baselines is
 %<*hyperref>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-hyperref}%
-  [2026-03-07 v2.37 Module hyperref for zref (HO)]%
+  [2026-09-16 v2.38 Module hyperref for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -5419,7 +5442,7 @@ the height difference of the two baselines is
 %<*savepos>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-savepos}%
-  [2026-03-07 v2.37 Module savepos for zref (HO)]%
+  [2026-09-16 v2.38 Module savepos for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -5543,7 +5566,7 @@ the height difference of the two baselines is
 %<*abspos>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-abspos}%
-  [2026-03-07 v2.37 Module abspos for zref (HO)]%
+  [2026-09-16 v2.38 Module abspos for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -6187,7 +6210,7 @@ the height difference of the two baselines is
 %<*dotfill>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-dotfill}%
-  [2026-03-07 v2.37 Module dotfill for zref (HO)]%
+  [2026-09-16 v2.38 Module dotfill for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -6287,7 +6310,7 @@ the height difference of the two baselines is
 %<*env>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{zref-env}%
-  [2026-03-07 v2.37 Module env for zref (HO)]%
+  [2026-09-16 v2.38 Module env for zref (HO)]%
 \RequirePackage{zref-base}[2019/11/29]
 \ifx\ZREF@base@ok Y%
 \else
@@ -6844,6 +6867,9 @@ the height difference of the two baselines is
 %   \begin{Version}{2026-03-07 v2.37}
 %   \item Updated |\zlabel| definition to new |\label| definition.
 %   https://github.com/ho-tex/zref/issues/23
+%   \end{Version}
+%   \begin{Version}{2026-09-16 v2.38}
+%   \item Adapted titleref module to \cs{DocumentMetadata}
 %   \end{Version}
 % \end{History}
 %
