@@ -233,9 +233,39 @@ and the derived files
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{zref.drv}%
   [2026-09-16 v2.38 A new reference scheme for LaTeX (HO)]%
+\DocumentMetadata{tagging=on}  
 \documentclass{ltxdoc}
 \usepackage{holtxdoc}[2011/11/22]
 \setlength{\emergencystretch}{1em}
+\makeatletter
+\renewenvironment{declcs}[1]{%
+  \par
+  \tagstructbegin{tag=Code}\tagmcbegin{}%
+  \SuspendTagging{}
+  \addvspace{4.5ex plus 1ex}%
+  \vskip -\parskip
+  \noindent
+  \hspace{-\leftmargini}%
+  \def\M##1{\texttt{\{}\meta{##1}\texttt{\}}}%
+  \def\*{\unskip\,\texttt{*}}%
+  \begin{tabular}{|l|}%
+    \hline
+    \expandafter\SpecialUsageIndex\csname #1\endcsname
+    \cs{#1}%
+}{%
+    \\%
+    \hline
+  \end{tabular}%
+  \nobreak
+  \par
+  \ResumeTagging{}\tagmcend\tagstructend
+  \nobreak
+  \vspace{2.3ex}%
+  \vskip -\parskip
+  \noindent
+  \ignorespacesafterend
+}
+\makeatother
 \begin{document}
   \DocInput{zref.dtx}%
 \end{document}
@@ -851,17 +881,17 @@ and the derived files
 % Without optional argument similar to \cs{ref}, it returns
 % the default reference property. This property is named
 % |default|:
-% \[
-%   |\zref{|x|}| \equiv |\zref[default]{|x|}|
-% \]
+% \begin{center}
+%   |\zref{|x|}| $\equiv$ |\zref[default]{|x|}|
+% \end{center}
 %
 % \begin{declcs}{zpageref}
 %   \M{refname}\markbabel
 % \end{declcs}
 % Convenience macro, similar to \cs{pageref}.
-% \[
-%   |\zpageref{|x|}| \equiv |\zref[page]{|x|}|
-% \]
+% \begin{center}
+%   |\zpageref{|x|}| $\equiv$ |\zref[page]{|x|}|
+% \end{center}
 %
 % \begin{declcs}{zrefused}
 %   \M{refname}\markbabel
@@ -6358,26 +6388,6 @@ the height difference of the two baselines is
 % \end{description}
 %
 %
-% \paragraph{Bundle.} All the packages of the bundle `zref'
-% are also available in a TDS compliant ZIP archive. There
-% the packages are already unpacked and the documentation files
-% are generated. The files and directories obey the TDS standard.
-% \begin{description}
-% \item[\CTANinstall{install/macros/latex/contrib/zref.tds.zip}]
-% \end{description}
-% \emph{TDS} refers to the standard ``A Directory Structure
-% for \TeX\ Files'' (\CTANpkg{tds}). Directories
-% with \xfile{texmf} in their name are usually organized this way.
-%
-% \subsection{Bundle installation}
-%
-% \paragraph{Unpacking.} Unpack the \xfile{zref.tds.zip} in the
-% TDS tree (also known as \xfile{texmf} tree) of your choice.
-% Example (linux):
-% \begin{quote}
-%   |unzip zref.tds.zip -d ~/texmf|
-% \end{quote}
-%
 %
 % \subsection{Package installation}
 %
@@ -6393,7 +6403,7 @@ the height difference of the two baselines is
 % (also known as \xfile{texmf} tree):
 % \begin{quote}
 % \def\t{^^A
-% \begin{tabular}{@{}>{\ttfamily}l@{ $\rightarrow$ }>{\ttfamily}l@{}}
+% \begin{tabular}{@{}>{\ttfamily}l@{ \SuspendTagging{}$\rightarrow$\ResumeTagging{} }>{\ttfamily}l@{}}
 %   zref.sty & tex/latex/zref/zref.sty\\
 %   zref-base.sty & tex/latex/zref/zref-base.sty\\
 %   zref-abspage.sty & tex/latex/zref/zref-abspage.sty\\

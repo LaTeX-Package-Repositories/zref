@@ -9,6 +9,7 @@ sourcefiles={"*.dtx"}
 installfiles={"*.sty"}
 scriptfiles={"*.lua"}
 
+typesetexe="lualatex"
  
 packtdszip  = false
 
