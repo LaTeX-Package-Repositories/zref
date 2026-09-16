@@ -23,3 +23,6 @@ Package qstest Info: Passed: getcurrent on input line ....
 Package qstest Info: Passed: extract on input line ....
 [1
 ] (zref-test-base.aux)
+***************
+Compilation 1 of test file completed with exit status 0
+Compilation 2 of test file completed with exit status 0

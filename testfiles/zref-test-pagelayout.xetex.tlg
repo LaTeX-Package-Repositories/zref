@@ -76,3 +76,6 @@ Package zref-pagelayout Info: Page layout parameters:
 (zref-pagelayout)               columnwidth = 22609920sp = 345.0pt
 (zref-pagelayout)               columnsep = 655360sp = 10.0pt
 (zref-pagelayout)             .
+***************
+Compilation 1 of test file completed with exit status 1
+Compilation 2 of test file completed with exit status 1
