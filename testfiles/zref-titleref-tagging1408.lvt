@@ -1,0 +1,56 @@
+\DocumentMetadata{}
+\input{regression-test}
+\documentclass{article} %memoir
+
+\usepackage{amsthm}
+\usepackage{zref-user}
+\usepackage{zref-titleref}
+\providecommand\zlabel[1]{}
+\providecommand\ztitleref[1]{?}
+\usepackage{listings}
+\usepackage{longtable}
+\newtheorem{theorem}{Theorem}
+\title{zref-titleref tagging test}
+\AddToHookWithArguments{label}{\zlabel{#1}}
+
+\SHOWFILE{\jobname.aux}
+% desc + thm will work with latex 2026-11-01
+\begin{document}
+\START\showoutput
+
+\tableofcontents
+\listoffigures
+\section[label=seckey]{section.}
+\label{sec}
+%
+\section*{starred section.\label{secinner}}
+\label{secstar}
+%
+\begin{figure}
+\caption{some caption.\label{captinner}}\label{captouter}
+\end{figure}
+
+\begin{description}
+  \item[desc]\label{desc}aaa
+\end{description}
+
+\begin{lstlisting}[caption=listing.,label=lst]
+abc
+\end{lstlisting}
+
+\begin{longtable}{l}
+\caption{long}\label{long}
+\end{longtable}
+
+\begin{theorem}[thm.]\label{thm}
+Some theorem
+\end{theorem}
+
+section: \ztitleref{sec}, \ztitleref{seckey}\\
+starred section: \ztitleref{secstar}, \ztitleref{secinner}\\
+caption: \ztitleref{captinner},\ztitleref{captouter}\\
+desc: \ztitleref{desc}\\
+long: \ztitleref{long}\\
+lst: \ztitleref{lst}\\
+thm: \ztitleref{thm}
+\end{document}

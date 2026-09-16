@@ -6,8 +6,9 @@
 %
 % Copyright (C)
 %    2006-2012  Heiko Oberdiek
-%    2016-2025  Oberdiek Package Support Group
-%    https://github.com/ho-tex/zref/issues
+%    2016-2026  Oberdiek Package Support Group
+%    2026       LaTeX Project 
+%    https://github.com/LaTeX-Package-Repositories/zref%    
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either
@@ -22,8 +23,8 @@
 % This work has the LPPL maintenance status "maintained".
 %
 % The Current Maintainers of this work are
-% Heiko Oberdiek and the Oberdiek Package Support Group
-% https://github.com/ho-tex/zref/issues
+% Heiko Oberdiek and the LaTeX Project 
+% https://github.com/LaTeX-Package-Repositories/zref
 %
 % This work consists of the main source file zref.dtx
 % and the derived files
@@ -129,6 +130,7 @@ Version: 2026-03-07 v2.37
 Copyright (C)
   2006-2012 Heiko Oberdiek
   2016-2026 Oberdiek Package Support Group
+  2026      LaTeX Project
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License, either
@@ -143,8 +145,8 @@ LaTeX version 2005/12/01 or later.
 This work has the LPPL maintenance status "maintained".
 
 The Current Maintainers of this work are
-Heiko Oberdiek and the Oberdiek Package Support Group
-https://github.com/ho-tex/zref/issues
+Heiko Oberdiek and the LaTeX Project 
+https://github.com/LaTeX-Package-Repositories/zref
 
 
 This work consists of the main source file zref.dtx
@@ -247,7 +249,7 @@ and the derived files
 % \title{The \xpackage{zref} package}
 % \date{2026-03-07 v2.37}
 % \author{Heiko Oberdiek\thanks
-% {Please report any issues at \url{https://github.com/ho-tex/zref/issues}}}
+% {Please report any issues at \url{https://github.com/LaTeX-Package-Repositories/zref}}}
 %
 % \maketitle
 %
@@ -820,7 +822,16 @@ and the derived files
 % \end{declcs}
 % Similar to \cs{label}. It generates a label with name
 % \meta{refname} in the new reference scheme.
-%
+% It is recommended not to use it in moving arguments, so e.g. in the 
+% argument of a \cs{section} or \cs{caption}. While \LaTeX{} removes a normal
+% \cs{label} when writing to an auxiliary file, it doesn't know about \cs{zlabel}
+% and one can get multiplied defined labels if the command is executed again, 
+% e.g., in the list of figure. 
+% It is possible to executed the command together with a standard \cs{label} by adding it 
+% to the label hook with
+% \begin{verbatim}
+% \AddToHookWithArguments{label}{\zlabel{#1}}
+% \end{verbatim}
 % \begin{declcs}{zref}
 %   |[|\meta{propname}|]| \M{refname}\markbabel
 % \end{declcs}
@@ -2581,6 +2592,7 @@ the height difference of the two baselines is
 %    \verb|#2| the name of the reference. In case of immediate
 %    writing, the deferred execution of property values is
 %    disabled. Also \thepage is made expandable in this case.
+%    \changes{v2.38}{2026-09-16}{gobble label command when writing}
 %    \begin{macrocode}
 \def\ZREF@label#1#2{%
   \if@filesw
@@ -2589,6 +2601,10 @@ the height difference of the two baselines is
         \let\ZREF@org@thepage\thepage
       \fi
       \protected@write\@auxout{%
+        \let\zlabel\@gobble
+        \let\label\@gobble@om
+        \let\index\@gobble@som
+        \let\glossary\@gobble@om
         \ifZREF@immediate
           \let\thepage\ZREF@org@thepage
         \fi
@@ -3036,11 +3052,16 @@ the height difference of the two baselines is
 %    Later we will redefine the section and caption macros
 %    to catch the current title and remember the value in
 %    \cs{zref@titleref@current}.
+%    \changes{2.38}{2026-09-16}{Use \cs{@currentlabelname} if \cs{DocumentMetadata} is used}
 %    \begin{macro}{\ZREF@NewPropTitle}
 %    \begin{macrocode}
 \def\ZREF@NewPropTitle{%
-  \gdef\zref@titleref@current{}%
-  \zref@newprop{title}{\zref@titleref@current}%
+  \IfDocumentMetadataTF
+   {\zref@newprop{title}{\@currentlabelname}}
+   {%
+    \gdef\zref@titleref@current{}%
+    \zref@newprop{title}{\zref@titleref@current}%
+   }%
   \global\let\ZREF@NewPropTitle\relax
 }
 %    \end{macrocode}
@@ -4482,6 +4503,7 @@ the height difference of the two baselines is
 %    stored in \cs{zref@titleref@current}. Some cleanup and
 %    expansion is performed that can be controlled by the
 %    previous switches.
+%    \changes{2.38}{2026-09-16}{Set \cs{@currentlabelname} if \cs{DocumentMetadata} is used}
 %    \begin{macrocode}
 \ZREF@Robust\def\zref@titleref@setcurrent#1{%
   \ifzref@titleref@expand
@@ -4499,6 +4521,26 @@ the height difference of the two baselines is
     }%
   \fi
 }%
+\IfDocumentMetadataT
+ {%
+   \ZREF@Robust\def\zref@titleref@setcurrent#1{%
+  \ifzref@titleref@expand
+    \GetTitleStringExpand{#1}%
+  \else
+    \GetTitleStringNonExpand{#1}%
+  \fi
+  \edef\zref@titleref@current{%
+    \detokenize\expandafter{\GetTitleStringResult}%
+  }%  
+  \ifzref@titleref@stripperiod
+    \edef\zref@titleref@current{%
+      \expandafter\ZREF@stripperiod\zref@titleref@current
+      \ltx@empty.\ltx@empty\@nil
+    }%
+  \fi
+  \let\@currentlabelname\zref@titleref@current
+  }%
+ }
 \GetTitleStringDisableCommands{%
   \ZREF@titleref@hook
 }
@@ -4531,9 +4573,21 @@ the height difference of the two baselines is
 \define@key{ZREF@TR}{cleanup}{%
   \zref@titleref@cleanup{#1}%
 }%
-\define@key{ZREF@TR}{title}{%
-  \def\zref@titleref@current{#1}%
-}%
+%    \end{macrocode}
+%\changes{2.38}{2026-09-16}{Set also \cs{@currentlabelname} if \cs{DocumentMetadata} is used}
+%    \begin{macrocode}
+\IfDocumentMetadataTF
+ {
+   \define@key{ZREF@TR}{title}{%
+     \def\zref@titleref@current{#1}%
+     \let\@currentlabelname\zref@titleref@current
+   }%
+ }
+ {
+   \define@key{ZREF@TR}{title}{%
+     \def\zref@titleref@current{#1}%
+   }%
+ }
 \ZREF@IfDefinable\ztitlerefsetup\def{%
   {\kvsetkeys{ZREF@TR}}%
 }%

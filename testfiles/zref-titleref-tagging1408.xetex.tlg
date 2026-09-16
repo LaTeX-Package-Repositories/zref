@@ -1,0 +1,681 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(zref-titleref-tagging1408.toc)
+\tf@toc=\write...
+(zref-titleref-tagging1408.lof)
+\tf@lof=\write...
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0
+.\hbox(0.0+0.0)x0.0
+..\special{pdf:obj @pdf.obj1 <<  >>}
+..\special{pdf:obj @pdf.obj2 <<  >>}
+..\special{pdf:obj @pdf.obj3 <<  >>}
+..\special{pdf:obj @pdf.obj4 <<  >>}
+.\hbox(0.0+0.0)x0.0
+..\kern -72.26999
+..\vbox(0.0+0.0)x0.0, glue set 72.26999fil
+...\kern -72.26999
+...\hbox(0.0+0.0)x0.0
+....\special{pdf: put @thispage <</Tabs /S >>}
+....\special{pdf:put @resources <</ExtGState @pdf.obj1>>}
+....\glue 0.0 plus 1.0fil minus 1.0fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0
+..\vbox(12.0+0.0)x345.0, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\special{pdf:nolink}
+...\hbox(0.0+0.0)x345.0
+....\hbox(0.0+0.0)x345.0
+...\special{pdf:link}
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 138.7051fil
+...\vbox(18.85999+0.0)x345.0
+....\vbox(18.85999+0.0)x345.0
+.....\special{}
+.....\write1{\@writefile{lof}{\protect \contentsline {figure}{\protect \numberline {1}{\ignorespaces some caption.}}{\thepage }{figure.struct.1}\protected@file@percent }}
+.....\glue 10.0
+.....\hbox(6.8+2.05998)x345.0, glue set 120.585fil
+......\glue 0.0 plus 1.0fil
+......\TU/lmr/m/n/10 Figure
+......\penalty 10000
+......\glue 3.33 plus 1.665 minus 1.11
+......\TU/lmr/m/n/10 1:
+......\glue 4.44 plus 3.32999 minus 0.555
+......\TU/lmr/m/n/10 some
+......\glue 3.33 plus 1.665 minus 1.11
+......\TU/lmr/m/n/10 caption.
+......\write1{\zref@newlabel{captinner}{\default{1}\page{\Z@C@page }\title{some caption}}}
+......\write1{\newlabel{captinner}{{1}{\thepage }{some caption}{figure.struct.1}{}}}
+......\glue 0.0 plus 1.0fil
+.....\glue 0.0
+.....\write1{\zref@newlabel{captouter}{\default{1}\page{\Z@C@page }\title{some caption}}}
+.....\write1{\newlabel{captouter}{{1}{\thepage }{some caption}{figure.struct.1}{}}}
+.....\glue 0.0
+...\glue 12.0 plus 2.0 minus 2.0
+...\glue -12.0 plus -2.0 minus -2.0
+...\glue 20.0 plus 2.0 minus 4.0
+...\special{pdf:majorversion 2}
+...\special{pdf:minorversion 0}
+...\special{pdf:put @pdf.obj1<</opacity1 <</ca 1/CA 1>>>>}
+...\special{pdf:trailerid[ <00112233445566778899aabbccddeeff> <00112233445566778899aabbccddeeff> ]}
+...\write-{}
+...\glue(\topskip) 0.0
+...\hbox(10.0512+0.17279)x345.0, glue set 281.68323fil
+....\hbox(0.0+0.0)x0.0
+.....\hbox(0.0+0.0)x0.0
+.....\penalty 10000
+.....\glue 0.0
+....\TU/lmr/bx/n/14.4 Contents
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\glue -9.913 plus -0.86198
+...\glue 10.0 plus 1.0
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 4.9772
+...\hbox(6.85+0.05998)x345.0, glue set 276.58997fil
+....\glue(\leftskip) 15.0
+....\glue -15.0
+....\hbox(6.55+0.0)x15.0, glue set 9.25fil
+.....\TU/lmr/bx/n/10 1
+.....\glue 0.0 plus 1.0fil
+....\TU/lmr/bx/n/10 section.
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty 10000
+....\hbox(6.55+0.0)x15.50003, glue set 9.75003fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/bx/n/10 1
+.....\kern -1.0
+.....\kern 1.0
+....\penalty 10000
+....\glue(\parfillskip) -15.50003
+....\glue(\rightskip) 15.50003
+...\penalty -300
+...\glue 15.08499 plus 4.31 minus 0.86198
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 7.86002
+...\hbox(10.08+2.89438)x345.0, glue set 241.99686fil
+....\hbox(0.0+0.0)x0.0
+.....\hbox(0.0+0.0)x0.0
+.....\penalty 10000
+.....\glue 0.0
+....\TU/lmr/bx/n/14.4 List
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 of
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 Figures
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\glue 0.0 plus 0.2
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 2.44562
+...\hbox(6.66+1.93999)x345.0, glue set 231.44994fill
+....\glue(\leftskip) 38.00003
+....\hbox(0.0+0.0)x15.0
+....\hbox(0.0+0.0)x0.0
+....\penalty 10000
+....\glue -38.00003
+....\hbox(6.66+0.0)x23.00003, glue set 18.00003fil
+.....\TU/lmr/m/n/10 1
+.....\glue 0.0 plus 1.0fil
+....\TU/lmr/m/n/10 some
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 caption.
+....\penalty 10000
+....\leaders 0.0 plus 1.0fill
+.....\hbox(1.06+0.0)x7.77988
+......\mathon
+......\kern 2.49994
+......\hbox(1.06+0.0)x2.78
+.......\TU/lmr/m/n/10 .
+......\kern 2.49994
+......\mathoff
+....\penalty 10000
+....\hbox(6.66+0.0)x15.50003, glue set 10.50003fil
+.....\glue 0.0 plus 1.0fil
+.....\TU/lmr/m/n/10 1
+.....\kern -1.0
+.....\kern 1.0
+....\penalty 10000
+....\glue(\parfillskip) -25.50003
+....\glue(\rightskip) 25.50003
+...\penalty -300
+...\glue 15.08499 plus 4.31 minus 0.86198
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 6.26802
+...\hbox(9.79199+0.08638)x345.0, glue set 269.08324fil
+....\hbox(9.4464+0.0)x22.50719
+.....\hbox(0.0+0.0)x0.0
+.....\penalty 10000
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 1
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 section.
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}section.}{\thepage }{target*.3}\protected@file@percent }}
+...\write1{\zref@newlabel{seckey}{\default{1}\page{\Z@C@page }\title{section.}}}
+...\write1{\newlabel{seckey}{{1}{\thepage }{section.}{target*.3}{}}}
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\zref@newlabel{sec}{\default{1}\page{\Z@C@page }\title{section.}}}
+...\penalty 10000
+...\penalty 10000
+...\write1{\newlabel{sec}{{1}{\thepage }{section.}{target*.3}{}}}
+...\penalty 10000
+...\penalty 10000
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 7.92003
+...\hbox(9.99359+0.08638)x345.0, glue set 235.97765fil
+....\hbox(0.0+0.0)x0.0
+.....\hbox(0.0+0.0)x0.0
+.....\penalty 10000
+.....\glue 0.0
+....\TU/lmr/bx/n/14.4 starred
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 section.
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\zref@newlabel{secinner}{\default{1}\page{\Z@C@page }\title{starred section.}}}
+...\penalty 10000
+...\penalty 10000
+...\write1{\newlabel{secinner}{{1}{\thepage }{starred section.}{target*.4}{}}}
+...\penalty 10000
+...\penalty 10000
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\zref@newlabel{secstar}{\default{1}\page{\Z@C@page }\title{starred section.}}}
+...\penalty 10000
+...\penalty 10000
+...\write1{\newlabel{secstar}{{1}{\thepage }{starred section.}{target*.4}{}}}
+...\penalty 10000
+...\penalty 10000
+...\penalty 10000
+...\penalty 10000
+...\glue -4.0 plus -1.0 minus -1.0
+...\write1{\zref@newlabel{desc}{\default{1}\page{\Z@C@page }\title{starred section.}}}
+...\penalty 10000
+...\penalty 10000
+...\write1{\newlabel{desc}{{1}{\thepage }{starred section.}{target*.5}{}}}
+...\penalty 10000
+...\penalty 10000
+...\glue(\parskip) 4.0 plus 2.0 minus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 4.97362
+...\hbox(6.94+0.10999)x320.0, glue set 303.69fil, shifted 25.0
+....\hbox(6.94+0.05998)x1.31
+.....\glue -25.0
+.....\hbox(6.94+0.05998)x21.31
+......\hbox(0.0+0.0)x0.0
+......\penalty 10000
+......\TU/lmr/bx/n/10 desc
+.....\glue 5.0
+....\penalty 0
+....\TU/lmr/m/n/10 aaa
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty -51
+...\glue 10.0 plus 3.0 minus 5.0
+...\penalty -50
+...\glue 6.0 plus 2.0 minus 2.0
+...\glue 0.0
+...\penalty 0
+...\write1{\zref@newlabel{lst}{\default{1}\page{\Z@C@page }\title{listing}}}
+...\write1{\newlabel{lst}{{1}{\thepage }{listing}{lstlisting.1}{}}}
+...\write1{\@writefile{lol}{\protect \contentsline {lstlisting}{\protect \numberline {1}listing.}{\thepage }{lstlisting.1}\protected@file@percent }}
+...\penalty 10000
+...\glue 3.0 plus 1.0 minus 1.0
+...\penalty 10000
+...\glue(\baselineskip) 4.95001
+...\hbox(6.94+2.05998)x345.0, glue set 134.87001fil
+....\glue 0.0 plus 1.0fil
+....\TU/lmr/m/n/10 Listing
+....\penalty 10000
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 1:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 listing.
+....\glue 0.0 plus 1.0fil
+...\penalty 10000
+...\glue 3.0 plus 1.0 minus 1.0
+...\penalty 10000
+...\glue(\parskip) 0.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 1.54005
+...\hbox(8.39996+3.60004)x345.0, glue set 326.99982fil
+....\hbox(8.39996+3.60004)x0.0
+.....\hbox(8.39996+3.60004)x0.0, glue set - 3.0fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(8.39996+3.60004)x0.0
+.......\hbox(8.39996+3.60004)x0.0
+........\rule(8.39996+3.60004)x0.0
+........\kern 0.0
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(8.39996+3.60004)x0.0
+.......\rule(8.39996+3.60004)x0.0
+......\kern 3.0
+......\kern 0.0
+.....\hbox(8.39996+3.60004)x0.0, glue set - 348.0fil
+......\kern 0.0
+......\hbox(8.39996+3.60004)x345.0
+.......\rule(8.39996+3.60004)x0.0
+.......\kern 345.0
+......\kern 3.0
+......\hbox(8.39996+3.60004)x0.0
+.......\hbox(8.39996+3.60004)x0.0
+........\rule(8.39996+3.60004)x0.0
+........\kern 0.0
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(8.39996+3.60004)x0.0
+.......\rule(8.39996+3.60004)x0.0
+......\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(0.0+0.0)x0.0
+....\hbox(6.94+0.10999)x18.00018
+.....\hbox(6.94+0.10999)x18.00018, glue set 0.75005fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\TU/lmr/m/n/10 a
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\TU/lmr/m/n/10 b
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\TU/lmr/m/n/10 c
+......\glue 0.0 plus 1.0fil minus 1.0fil
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty -50
+...\glue 6.0 plus 2.0 minus 2.0
+...\glue 0.0
+...\penalty 0
+...\glue 12.0 plus 4.0 minus 4.0
+...\special{}
+...\penalty 10000
+...\glue -12.0 plus -4.0 minus -4.0
+...\glue 12.0 plus 4.0 minus 4.0
+...\penalty 10000
+...\hbox(8.39996+14.05998)x345.0, glue set 164.83499fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+14.05998)x15.33002
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.0 plus 1.0fil
+.....\glue 0.00002
+.....\hbox(6.94+14.05998)x0.0, glue set - 144.54fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\vbox(6.94+14.05998)x289.07999
+.......\hbox(6.94+2.05998)x289.07999, glue set 115.51fil
+........\glue 0.0 plus 1.0fil
+........\TU/lmr/m/n/10 Table
+........\penalty 10000
+........\glue 3.33 plus 1.665 minus 1.11
+........\TU/lmr/m/n/10 1:
+........\glue 4.44 plus 3.32999 minus 0.555
+........\TU/lmr/m/n/10 long
+........\glue 0.0 plus 1.0fil
+.......\glue 12.0
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+.....\hbox(0.0+0.0)x0.0
+.....\write1{\@writefile{lot}{\protect \contentsline {table}{\protect \numberline {1}{long}}{\thepage }{table.1}\protected@file@percent }}
+.....\write1{\zref@newlabel{long}{\default{1}\page{\Z@C@page }\title{long}}}
+.....\write1{\newlabel{long}{{1}{\thepage }{long}{table.1}{}}}
+.....\glue 3.33 plus 1.665 minus 1.11
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\penalty 10000
+...\penalty 0
+...\glue 12.0 plus 4.0 minus 4.0
+...\glue -15.60004 plus -4.0 minus -4.0
+...\penalty -51
+...\glue 3.60004
+...\glue 12.0 plus 4.0 minus 4.0
+...\special{}
+...\penalty 10000
+...\glue -12.0 plus -4.0 minus -4.0
+...\glue 12.0 plus 4.0 minus 4.0
+...\write1{\zref@newlabel{thm}{\default{1}\page{\Z@C@page }\title{starred section.}}}
+...\penalty 10000
+...\penalty 10000
+...\write1{\newlabel{thm}{{1}{\thepage }{starred section.}{target*.7}{}}}
+...\penalty 10000
+...\penalty 10000
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 0.89996
+...\hbox(7.5+2.49998)x345.0, glue set 188.85fil
+....\glue 0.0
+....\TU/lmr/bx/n/10 Theorem
+....\glue 3.83 plus 1.915 minus 1.27666
+....\TU/lmr/bx/n/10 1
+....\glue 3.83 plus 1.915 minus 1.27666
+....\TU/lmr/m/n/10 (thm.)
+....\TU/lmr/bx/n/10 .
+....\glue 5.0 plus 1.0 minus 1.0
+....\penalty 0
+....\TU/lmr/m/it/10 Some
+....\glue 3.58 plus 1.79 minus 1.19333
+....\TU/lmr/m/it/10 theorem
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty -51
+...\glue 8.0 plus 2.0 minus 4.0
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 2.93001
+...\hbox(6.57+1.92998)x345.0, glue set 220.95999fil
+....\hbox(0.0+0.0)x15.0
+....\TU/lmr/m/n/10 section:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 section.,
+....\glue 3.33 plus 2.08124 minus 0.888
+....\TU/lmr/m/n/10 section.
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\penalty 150
+...\glue(\baselineskip) 3.13002
+...\hbox(6.94+1.92998)x345.0, glue set 133.95999fil
+....\TU/lmr/m/n/10 starred
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 section:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 starred
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 section.,
+....\glue 3.33 plus 2.08124 minus 0.888
+....\TU/lmr/m/n/10 starred
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 section.
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\glue(\baselineskip) 3.50002
+...\hbox(6.57+1.93999)x345.0, glue set 188.23fil
+....\TU/lmr/m/n/10 caption:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 some
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 caption,some
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 caption
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\glue(\baselineskip) 3.12001
+...\hbox(6.94+0.10999)x345.0, glue set 252.56999fil
+....\TU/lmr/m/n/10 desc:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 starred
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 section.
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\glue(\baselineskip) 4.95001
+...\hbox(6.94+2.05998)x345.0, glue set 301.1fil
+....\TU/lmr/m/n/10 long:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 long
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\glue(\baselineskip) 3.00002
+...\hbox(6.94+2.05998)x345.0, glue set 300.44fil
+....\TU/lmr/m/n/10 lst:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 listing
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\penalty 150
+...\glue(\baselineskip) 3.00002
+...\hbox(6.94+0.10999)x345.0, glue set 253.17fil
+....\TU/lmr/m/n/10 thm:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 starred
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 section.
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue -0.10999
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\special{pdf:nolink}
+..\glue(\baselineskip) 23.34
+..\hbox(6.66+0.0)x345.0
+...\hbox(6.66+0.0)x345.0, glue set 170.0fil
+....\glue 0.0 plus 1.0fil
+....\TU/lmr/m/n/10 1
+....\glue 0.0 plus 1.0fil
+..\special{pdf:link}
+.\kern 0.0
+.\kern 0.0
+.\kern -633.0
+.\hbox(0.0+0.0)x0.0
+..\special{pdf:stream @pdf.obj21 (
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/">
+ <rdf:RDF xmlns:rdf="http://www.w3.org/....-..-..-rdf-syntax-ns#">
+  <rdf:Description rdf:about=""
+    xmlns:pdf="http://ns.adobe.com/pdf/1.3/"
+    xmlns:xmpRights="http://ns.adobe.com/xap/1.0/rights/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/"
+    xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+    xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+    xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#"
+    xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/"
+    xmlns:pdfuaid="http://www.aiim.org/pdfua/ns/id/"
+    xmlns:pdfx="http://ns.adobe.com/pdfx/1.3/"
+    xmlns:prism="http://prismstandard.org/namespaces/basic/3.0/"
+    xmlns:stFnt="http://ns.adobe.com/xap/1.0/sType/Font#"
+    xmlns:Iptc4xmpCore="http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/"
+    xmlns:pdfaExtension="http://www.aiim.org/pdfa/ns/extension/"
+    xmlns:pdfaSchema="http://www.aiim.org/pdfa/ns/schema#"
+    xmlns:pdfaProperty="http://www.aiim.org/pdfa/ns/property#"
+    xmlns:pdfaType="http://www.aiim.org/pdfa/ns/type#"
+    xmlns:pdfaField="http://www.aiim.org/pdfa/ns/field#"
+    xmlns:tdm="http://www.w3.org/ns/tdmrep/">
+   <pdfaExtension:schemas>
+    <rdf:Bag>
+     <rdf:li rdf:parseType="Resource">
+      <pdfaSchema:schema>XMP Media Management Schema</pdfaSchema:schema>
+      <pdfaSchema:prefix>xmpMM</pdfaSchema:prefix>
+      <pdfaSchema:namespaceURI>http://ns.adobe.com/xap/1.0/mm/</pdfaSchema:namespaceURI>
+      <pdfaSchema:property>
+       <rdf:Seq>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>OriginalDocumentID</pdfaProperty:name>
+         <pdfaProperty:valueType>URI</pdfaProperty:valueType>
+         <pdfaProperty:category>internal</pdfaProperty:category>
+         <pdfaProperty:description>The common identifier for all versions and renditions of a document.</pdfaProperty:description>
+        </rdf:li>
+       </rdf:Seq>
+      </pdfaSchema:property>
+     </rdf:li>
+     <rdf:li rdf:parseType="Resource">
+      <pdfaSchema:schema>PDF/A Identification Schema</pdfaSchema:schema>
+      <pdfaSchema:prefix>pdfaid</pdfaSchema:prefix>
+      <pdfaSchema:namespaceURI>http://www.aiim.org/pdfa/ns/id/</pdfaSchema:namespaceURI>
+      <pdfaSchema:property>
+       <rdf:Seq>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>year</pdfaProperty:name>
+         <pdfaProperty:valueType>Integer</pdfaProperty:valueType>
+         <pdfaProperty:category>internal</pdfaProperty:category>
+         <pdfaProperty:description>Year of standard</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>rev</pdfaProperty:name>
+         <pdfaProperty:valueType>Integer</pdfaProperty:valueType>
+         <pdfaProperty:category>internal</pdfaProperty:category>
+         <pdfaProperty:description>Revision year of standard</pdfaProperty:description>
+        </rdf:li>
+       </rdf:Seq>
+      </pdfaSchema:property>
+     </rdf:li>
+     <rdf:li rdf:parseType="Resource">
+      <pdfaSchema:schema>PDF/UA Universal Accessibility Schema</pdfaSchema:schema>
+      <pdfaSchema:prefix>pdfuaid</pdfaSchema:prefix>
+      <pdfaSchema:namespaceURI>http://www.aiim.org/pdfua/ns/id/</pdfaSchema:namespaceURI>
+      <pdfaSchema:property>
+       <rdf:Seq>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>part</pdfaProperty:name>
+         <pdfaProperty:valueType>Integer</pdfaProperty:valueType>
+         <pdfaProperty:category>internal</pdfaProperty:category>
+         <pdfaProperty:description>Part of ISO 14289 standard</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>rev</pdfaProperty:name>
+         <pdfaProperty:valueType>Integer</pdfaProperty:valueType>
+         <pdfaProperty:category>internal</pdfaProperty:category>
+         <pdfaProperty:description>Revision of ISO 14289 standard</pdfaProperty:description>
+        </rdf:li>
+       </rdf:Seq>
+      </pdfaSchema:property>
+     </rdf:li>
+     <rdf:li rdf:parseType="Resource">
+      <pdfaSchema:schema>PRISM Basic Metadata</pdfaSchema:schema>
+      <pdfaSchema:prefix>prism</pdfaSchema:prefix>
+      <pdfaSchema:namespaceURI>http://prismstandard.org/namespaces/basic/3.0/</pdfaSchema:namespaceURI>
+      <pdfaSchema:property>
+       <rdf:Seq>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>complianceProfile</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>internal</pdfaProperty:category>
+         <pdfaProperty:description>PRISM specification compliance profile to which this document adheres</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>publicationName</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>Publication name</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>aggregationType</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>Publication type</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>bookEdition</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>Edition of the book in which the document was published</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>volume</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>Publication volume number</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>number</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>Publication issue number within a volume</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>pageRange</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>Page range for the document within the print version of its publication</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>issn</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>ISSN for the printed publication in which the document was published</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>eIssn</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>ISSN for the electronic publication in which the document was published</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>isbn</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>ISBN for the publication in which the document was published</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>doi</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>Digital Object Identifier for the document</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>url</pdfaProperty:name>
+         <pdfaProperty:valueType>URL</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>URL at which the document can be found</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>byteCount</pdfaProperty:name>
+         <pdfaProperty:valueType>Integer</pdfaProperty:valueType>
+         <pdfaProperty:category>internal</pdfaProperty:category>
+         <pdfaProperty:description>Approximate file size in octets</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>pageCount</pdfaProperty:name>
+         <pdfaProperty:valueType>Integer</pdfaProperty:valueType>
+         <pdfaProperty:category>internal</pdfaProperty:category>
+         <pdfaProperty:description>Number of pages in the print version of the document</pdfaProperty:description>
+        </rdf:li>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>subtitle</pdfaProperty:name>
+         <pdfaProperty:valueType>Text</pdfaProperty:valueType>
+         <pdfaProperty:category>external</pdfaProperty:category>
+         <pdfaProperty:description>Document's subtitle</pdfaProperty:description>
+        </rdf:li>
+       </rdf:Seq>
+      </pdfaSchema:property>
+     </rdf:li>
+     <rdf:li rdf:parseType="Resource">
+      <pdfaSchema:schema>TDMRep</pdfaSchema:schema>
+      <pdfaSchema:prefix>tdm</pdfaSchema:prefix>
+      <pdfaSchema:namespaceURI>http://www.w3.org/ns/tdmrep/</pdfaSchema:namespaceURI>
+      <pdfaSchema:property>
+       <rdf:Seq>
+        <rdf:li rdf:parseType="Resource">
+         <pdfaProperty:name>reservation</pdfaProperty:name>
+         <pdfaProperty:val\ETC.}
+..\special{pdf:docinfo<</Producer (xetex)>>}
+..\special{pdf:docinfo<</Creator (TeX)>>}
+..\special{pdf:docinfo<</Title <FEFF007A007200650066002D007400690074006C0065007200650066002000740061006700670069006E006700200074006500730074>>>}
+..\special{pdf:docinfo<</CreationDate (D:20160520090000Z)>>}
+..\special{pdf:docinfo<</ModDate (D:20160520090000Z)>>}
+..\special{pdf:put @catalog<</Lang (en)>>}
+..\special{pdf:put @catalog<</Metadata @pdf.obj21>>}
+.\kern 633.0
+(zref-titleref-tagging1408.aux)
+***************
+Compilation 1 of test file completed with exit status 0
+Compilation 2 of test file completed with exit status 0
