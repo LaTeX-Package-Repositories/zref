@@ -1,7 +1,8 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 -------- zref-lastpage.aux (start) ---------
-(zref-lastpage.aux) \relax[nl]
+(zref-lastpage.aux)
+\relax[nl]
 \providecommand\zref@newlabel[2]{}[nl]
 \@writefile{toc}{\contentsline {section}{\numberline {1}a}{1}{}\protected@file@percent }[nl]
 \@writefile{toc}{\contentsline {section}{\numberline {2}b}{2}{}\protected@file@percent }[nl]
