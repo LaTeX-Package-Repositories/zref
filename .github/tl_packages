@@ -52,6 +52,8 @@ collection-basic
 # From collection-latexextra
         alphalph
         bigfoot
+        bitset
+        csquotes
         hypdoc
         lastpage
         latex-amsmath-dev
@@ -101,6 +103,7 @@ collection-basic
         booktabs
         caption
         etoolbox
+        fancyvrb
         float
         fontspec
         hologo
@@ -120,6 +123,7 @@ collection-basic
         textcase
         translator
         unicode-math
+        underscore
         xcolor
         xkeyval
 
