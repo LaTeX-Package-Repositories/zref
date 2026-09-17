@@ -233,8 +233,10 @@ and the derived files
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{zref.drv}%
   [2026-09-16 v2.38 A new reference scheme for LaTeX (HO)]%
-\DocumentMetadata{tagging=on}  
-\documentclass{ltxdoc}
+\DocumentMetadata{tagging=on,pdfstandard=ua-2} 
+\PassOptionsToPackage{numbered}{hypdoc} 
+\documentclass{l3in2edoc}
+\let\Verb\undefined
 \usepackage{holtxdoc}[2011/11/22]
 \setlength{\emergencystretch}{1em}
 \makeatletter
@@ -251,6 +253,7 @@ and the derived files
   \begin{tabular}{|l|}%
     \hline
     \expandafter\SpecialUsageIndex\csname #1\endcsname
+    \label{doc/function//#1}%
     \cs{#1}%
 }{%
     \\%
@@ -482,7 +485,8 @@ and the derived files
 % Declares a new empty property list.
 %
 % \begin{declcs}{zref@addprop}
-%   \M{listname} \M{propname}\\
+%   \M{listname} \M{propname}\\%
+%   \label{doc/function//zref@localaddprop}%
 %   \cs{zref@localaddprop} \M{listname} \M{propname}
 % \end{declcs}
 % Adds the property \meta{propname}
@@ -496,14 +500,32 @@ and the derived files
 % at once is supported by \cs{zref@addprops}.
 %
 % \begin{declcs}{zref@addprops}
-%   \M{listname} \M{propname list}\\
+%   \M{listname} \M{propname list}\\%
+%   \label{doc/function//zref@localaddprops}%
 %   \cs{zref@localaddprops} \M{listname} \M{propname list}
 % \end{declcs}
 % These macros add a comma separated list of properties
 % \meta{propname list} to list \meta{listname}.
 % \cs{zref@addprops} works globally and \cs{zref@localaddprops}
 % locally. Since 2010/10/22 v2.19.
-%
+% 
+% \begin{declcs}{zref@delprop}
+%   \M{listname} \M{propname}\\%
+%   \label{doc/function//zref@localdelprop}%
+%   \cs{zref@localdelprop} \M{listname} \M{propname}
+% \end{declcs}
+% Removes the property \meta{propname}
+% from the property list \meta{listname}.
+% The property and list must exist.
+% The removal is global by \cs{zref@delprop} and limited to
+% local scope by \cs{zref@localdelprop}.
+% 
+% \begin{declcs}{zref@showprop}
+%   \M{propname}\\
+%   \cs{zref@showprop} \M{propname}
+% \end{declcs}
+% Writes (only) into the log-file some information about the propname.
+% 
 % \begin{declcs}{zref@listexists}
 %   \M{listname} \M{then}
 % \end{declcs}
@@ -594,6 +616,13 @@ and the derived files
 % are used that are given as comma separated list in the
 % second argument.
 %
+% \begin{declcs}{zref@labelbykv}
+%   \M{key value list}  \M{refname}
+% \end{declcs}
+% Same as \cs{zref@label} except that a key value list is used to
+% select the properties. See the description of 
+% \cs{zkvlabel}, page \pageref{doc/function//zkvlabel}. 
+% 
 % \begin{declcs}{zref@newlabel}
 %   \M{refname} |{|\dots|}|
 % \end{declcs}
@@ -646,7 +675,7 @@ and the derived files
 %
 % \begin{declcs}{zref@def@extract}%
 %     \M{cmd} \M{refname} \M{propname}\\
-%   \cs{zref@def@extractdefault}
+%   \cs{zref@def@extractdefault}\label{doc/function//zref@def@extractdefault}
 %     \M{cmd} \M{refname} \M{propname} \M{default}
 % \end{declcs}
 % Both macros extract the property \meta{propname} from the reference
@@ -875,6 +904,28 @@ and the derived files
 % \begin{verbatim}
 % \AddToHookWithArguments{label}{\zlabel{#1}}
 % \end{verbatim}
+%
+% \begin{declcs}{zkvlabel}
+%   \M{key value list}\M{refname}
+% \end{declcs}
+% Similar to \cs{zlabel} this creates a label. The \meta{key value list}
+% allows to select the stored properties. The following keys are known:
+% \begin{description}
+% \item[prop] This selects a property that should be used by the label. It can be used more than
+% once. So this will store both properties:
+% \begin{verbatim}
+% \zkvlabel{prop=page,prop=default}{blub}
+% \end{verbatim} 
+% \item[list] This selects a list from which then all properties are stored.
+% \item[delprop] This allows to remove a property that has been already selected. So
+% this will not store the page:
+% \begin{verbatim}
+% \zkvlabel{list=main,delprop=page}{blub}
+% \end{verbatim}
+% \item[immediate] This forces properties that are normally delayed and stored only
+% at shipout like \texttt{page} to be stored directly. 
+% \end{description}  
+%
 % \begin{declcs}{zref}
 %   |[|\meta{propname}|]| \M{refname}\markbabel
 % \end{declcs}
@@ -884,7 +935,7 @@ and the derived files
 % \begin{center}
 %   |\zref{|x|}| $\equiv$ |\zref[default]{|x|}|
 % \end{center}
-%
+% 
 % \begin{declcs}{zpageref}
 %   \M{refname}\markbabel
 % \end{declcs}
@@ -1039,6 +1090,7 @@ and the derived files
 % it might change in future versions.
 %
 % \begin{declcs}{zref@thepage}\markexp \M{absolute page number}\\
+%   \label{doc/function//zref@thepage@refused}
 %   \cs{zref@thepage@refused} \M{absolute page number}
 % \end{declcs}
 % Macro \cs{zref@thepage} returns the page number (\cs{thepage})
@@ -1347,7 +1399,8 @@ and the derived files
 % is executed in properties |posx| and |posy|.
 %
 % \begin{declcs}{zsaveposx}
-%   \M{refname}\\
+%   \M{refname}\\%
+%   \label{doc/function//zsaveposy}%
 %   \cs{zsaveposy}
 %   \M{refname}
 % \end{declcs}
@@ -1392,7 +1445,20 @@ and the derived files
 %
 % \subsection{Module \xmodule{abspos}}
 % Module \xmodule{abspos} allows to get various values of the page layout. There is no user
-% command, only a number of internal commands. For example:
+% command, only a number of internal commands.% 
+% \label{doc/function//zref@absposx}%
+% \label{doc/function//zref@absposy}%
+% \label{doc/function//zref@absposnumx}%
+% \label{doc/function//zref@absposnumy}%
+% \label{doc/function//zref@def@absposx}%
+% \label{doc/function//zref@def@absposy}%
+% \label{doc/function//zref@def@absposnumx}%
+% \label{doc/function//zref@def@absposnumy}%
+% \label{doc/function//zref@absposused}%
+% \label{doc/function//zref@absposnumused}%
+% \label{doc/function//zref@ifabsposundefined}%
+% \label{doc/function//zref@ifabsposnumundefined}%
+% For example:
 % \begin{quote}
 %   |\zref@absposx{|\meta{label}|}{|\meta{value}|}{|\meta{position}|}|\\
 %   |\zref@absposy{|\meta{label}|}{|\meta{value}|}{|\meta{position}|}|
@@ -1459,7 +1525,7 @@ and the derived files
 % \subsection{Module \xmodule{env}}
 %
 % This module defines two properties |envname| and |envline|. They
-% remember the name of the environment and the line number at
+% remember the name of the environment and the line number (in the source) at
 % the start of the environment.
 %
 % \subsection{Module \xmodule{xr}}
@@ -1531,10 +1597,14 @@ and the derived files
 % in luatex. There is no user command. Programmer commands are
 %
 % \begin{quote}
-% |\zref@pdfpageattr{|\meta{absolute page number}|}|
+% |\zref@pdfpageattr{|\meta{absolute page number}|}|\label{doc/function//zref@pdfpageattr}
 %
-% |\zref@pdfpagesattr{|\meta{absolute page number}|}|
+% |\zref@pdfpagesattr{|\meta{absolute page number}|}|\label{doc/function//zref@pdfpagesattr}
+% 
+% |\zref@pdfpagesattr@used|\label{doc/function//zref@pdfpagesattr@used}
 % \end{quote}
+% 
+% Note that if the PDF management is used, page attributes are often set only at shipout.
 % \section{ToDo}\label{sec:todo}
 %
 % Among other things the following issues are left for future work:
@@ -1835,7 +1905,7 @@ the height difference of the two baselines is
 \RequirePackage{pdftexcmds}[2010/04/01]
 %    \end{macrocode}
 %
-%    \begin{macro}{\ZREF@name}
+%    \begin{macro}[no-user-doc]{\ZREF@name}
 %    Several times the package name is used, thus we store it
 %    in \cmd{\ZREF@name}.
 %    \begin{macrocode}
@@ -1847,7 +1917,7 @@ the height difference of the two baselines is
 \ltx@IfUndefined{protected}{%
   \RequirePackage{makerobust}[2006/03/18]%
 %    \end{macrocode}
-%    \begin{macro}{\ZREF@Robust}
+%    \begin{macro}[no-user-doc]{\ZREF@Robust}
 %    \begin{macrocode}
   \def\ZREF@Robust#1#2{%
     \def\ZREF@temp{\MakeRobustcommand#2}%
@@ -1859,7 +1929,7 @@ the height difference of the two baselines is
 %    \begin{macrocode}
 }{%
 %    \end{macrocode}
-%    \begin{macro}{\ZREF@Robust}
+%    \begin{macro}[no-user-doc]{\ZREF@Robust}
 %    \begin{macrocode}
   \def\ZREF@Robust#1{%
     \protected#1%
@@ -1869,7 +1939,7 @@ the height difference of the two baselines is
 %    \begin{macrocode}
 }
 %    \end{macrocode}
-%    \begin{macro}{\ZREF@IfDefinable}
+%    \begin{macro}[no-user-doc]{\ZREF@IfDefinable}
 %    \begin{macrocode}
 \def\ZREF@IfDefinable#1#2#3{%
   \@ifdefinable{#1}{%
@@ -1879,7 +1949,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@UpdatePdfTeX}
+%    \begin{macro}[no-user-doc]{\ZREF@UpdatePdfTeX}
 %    \cs{ZREF@UpdatePdfTeX} is used as help message text in
 %    error messages.
 %    \begin{macrocode}
@@ -1887,14 +1957,14 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ifZREF@found}
+%    \begin{macro}[no-user-doc]{\ifZREF@found}
 %    The following switch is used in list processing.
 %    \begin{macrocode}
 \newif\ifZREF@found
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@patch}
+%    \begin{macro}[no-user-doc]{\ZREF@patch}
 %    Macro \cs{ZREF@patch} first checks the existence of
 %    the command and safes it.
 %    \begin{macrocode}
@@ -1955,7 +2025,7 @@ the height difference of the two baselines is
   \string\providecommand\string\zref@newlabel[2]{}%
 }
 %    \end{macrocode}
-%    \begin{macro}{\ZREF@RefPrefix}
+%    \begin{macro}[no-user-doc]{\ZREF@RefPrefix}
 %    \begin{macrocode}
 \def\ZREF@RefPrefix{Z@R}
 %    \end{macrocode}
@@ -2042,7 +2112,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\zref@listforloop}
+%    \begin{macro}[no-user-doc]{\zref@listforloop}
 %    \begin{macrocode}
 \def\zref@listforloop#1#2{%
   \zref@listexists{#1}{%
@@ -2140,7 +2210,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\zref@localaddprop}
+%    \begin{macro}[no-user-doc]{\zref@localaddprop}
 %    \begin{macrocode}
 \ZREF@Robust\def\zref@localaddprop#1#2{%
   \zref@listexists{#1}{%
@@ -2178,7 +2248,7 @@ the height difference of the two baselines is
   }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@delprop}
+%    \begin{macro}[no-user-doc]{\ZREF@delprop}
 %    \begin{macrocode}
   \def\ZREF@delprop#1#2#3{%
     \zref@listexists{#2}{%
@@ -2198,14 +2268,14 @@ the height difference of the two baselines is
   }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@@delprop}
+%    \begin{macro}[no-user-doc]{\ZREF@@delprop}
 %    \begin{macrocode}
   \def\ZREF@@delprop#1{%
     \expandafter\ZREF@@@delprop\expandafter{\string#1}#1%
   }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@@@delprop}
+%    \begin{macro}[no-user-doc]{\ZREF@@@delprop}
 %    \begin{macrocode}
   \def\ZREF@@@delprop#1#2{%
     \ifx#2!%
@@ -2240,7 +2310,7 @@ the height difference of the two baselines is
   }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@delprop}
+%    \begin{macro}[no-user-doc]{\ZREF@delprop}
 %    \begin{macrocode}
   \def\ZREF@delprop#1#2#3{%
     \zref@listexists{#2}{%
@@ -2257,7 +2327,7 @@ the height difference of the two baselines is
   }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@@delprop}
+%    \begin{macro}[no-user-doc]{\ZREF@@delprop}
 %    Caution: |#1| might be an \cs{if} or similar token.
 %    \begin{macrocode}
   \def\ZREF@@delprop#1{%
@@ -2265,7 +2335,7 @@ the height difference of the two baselines is
   }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@@@delprop}
+%    \begin{macro}[no-user-doc]{\ZREF@@@delprop}
 %    \begin{macrocode}
   \def\ZREF@@@delprop#1#2{%
     \ifx#2!%
@@ -2341,7 +2411,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@newprop}
+%    \begin{macro}[no-user-doc]{\ZREF@newprop}
 %    \begin{macrocode}
 \def\ZREF@newprop#1{%
   \edef\ZREF@P{#1}%
@@ -2374,13 +2444,13 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@par}
+%    \begin{macro}[no-user-doc]{\ZREF@par}
 %    \begin{macrocode}
 \def\ZREF@par{par}
 \@onelevel@sanitize\ZREF@par
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@@newprop}
+%    \begin{macro}[no-user-doc]{\ZREF@@newprop}
 %    \begin{macrocode}
 \def\ZREF@@newprop[#1]{%
   \global\@namedef{Z@D@\ZREF@P}{#1}%
@@ -2443,7 +2513,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@getcurrent}
+%    \begin{macro}[no-user-doc]{\ZREF@getcurrent}
 %    \cs{zref@getcurrent} gets the current value for a property.
 %    \begin{macrocode}
 \def\ZREF@getcurrent#1{%
@@ -2457,7 +2527,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@u@getcurrent}
+%    \begin{macro}[no-user-doc]{\ZREF@u@getcurrent}
 %    \begin{macrocode}
 \def\ZREF@wu@getcurrent#1{%
   \etex@unexpanded\expandafter\expandafter\expandafter{%
@@ -2586,12 +2656,12 @@ the height difference of the two baselines is
   \fi
 }
 %    \end{macrocode}
-%    \begin{macro}{\ZREF@false}
+%    \begin{macro}[no-user-doc]{\ZREF@false}
 %    \begin{macrocode}
 \def\ZREF@false{false}
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@true}
+%    \begin{macro}[no-user-doc]{\ZREF@true}
 %    \begin{macrocode}
 \def\ZREF@true{true}
 %    \end{macrocode}
@@ -2612,7 +2682,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %
-%    \begin{macro}{\ifZREF@immediate}
+%    \begin{macro}[no-user-doc]{\ifZREF@immediate}
 %    The switch \cs{ifZREF@immediate} tells us, whether the
 %    label should be written immediately or at page shipout time.
 %    \cs{ZREF@label} need to be notified about this, because
@@ -2639,7 +2709,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@label}
+%    \begin{macro}[no-user-doc]{\ZREF@label}
 %    \cs{ZREF@label} writes the data in the \xfile{.aux} file.
 %    \verb|#1| contains the list of valid properties,
 %    \verb|#2| the name of the reference. In case of immediate
@@ -2742,7 +2812,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@ifrefundefined}
+%    \begin{macro}[no-user-doc]{\ZREF@ifrefundefined}
 %    \begin{macrocode}
 \def\ZREF@ifrefundefined#1{%
   \zref@refused{#1}%
@@ -2762,7 +2832,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@refused}
+%    \begin{macro}[no-user-doc]{\ZREF@refused}
 %    \begin{macrocode}
 \def\ZREF@refused#1{%
   \zref@ifrefundefined{#1}{%
@@ -2822,7 +2892,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@@extract}
+%    \begin{macro}[no-user-doc]{\ZREF@@extract}
 %    \begin{macrocode}
 \def\ZREF@@extract#1#2#3{%
   \expandafter\expandafter\expandafter\ltx@space
@@ -2830,7 +2900,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@wu@extract}
+%    \begin{macro}[no-user-doc]{\ZREF@wu@extract}
 %    \begin{macrocode}
 \def\ZREF@wu@extract#1#2{%
   \etex@unexpanded\expandafter\expandafter\expandafter{%
@@ -2845,7 +2915,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@extractdefault}
+%    \begin{macro}[no-user-doc]{\ZREF@extractdefault}
 %    The basic extracting macro is \cs{zref@extractdefault} with
 %    the reference name in \verb|#1|, the property in \verb|#2| and
 %    the default value in \verb|#3| in case for problems.
@@ -2866,7 +2936,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@wu@extractdefault}
+%    \begin{macro}[no-user-doc]{\ZREF@wu@extractdefault}
 %    \begin{macrocode}
 \def\ZREF@wu@extractdefault#1#2#3{%
   \etex@unexpanded\expandafter\expandafter\expandafter{%
@@ -2888,7 +2958,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@def@extract}
+%    \begin{macro}[no-user-doc]{\ZREF@def@extract}
 %    \begin{macrocode}
 \def\ZREF@def@extract#1#2#3{%
   \zref@refused{#2}%
@@ -2907,7 +2977,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@def@extractdefault}
+%    \begin{macro}[no-user-doc]{\ZREF@def@extractdefault}
 %    \begin{macrocode}
 \def\ZREF@def@extractdefault#1#2#3#4{%
   \zref@refused{#2}%
@@ -2920,7 +2990,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@wrapper@unexpanded}
+%    \begin{macro}[no-user-doc]{\ZREF@wrapper@unexpanded}
 %    \begin{macrocode}
 \ZREF@Robust{\long\def}\ZREF@wrapper@unexpanded#1{%
   \let\zref@wrapper@unexpanded\ltx@firstofone
@@ -3019,7 +3089,7 @@ the height difference of the two baselines is
 %
 % \subsubsection{Utilities}
 %
-%    \begin{macro}{\ZREF@number}
+%    \begin{macro}[no-user-doc]{\ZREF@number}
 %    \begin{macrocode}
 \ltx@IfUndefined{numexpr}{%
   \def\ZREF@number#1{\number#1}%
@@ -3091,7 +3161,7 @@ the height difference of the two baselines is
 %
 % \paragraph{Properties}
 %
-%    \begin{macro}{\ZREF@NewPropAnchor}
+%    \begin{macro}[no-user-doc]{\ZREF@NewPropAnchor}
 %    \begin{macrocode}
 \def\ZREF@NewPropAnchor{%
   \zref@newprop{anchor}{%
@@ -3101,12 +3171,12 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\zref@titleref@current}
+%    \begin{macro}[no-user-doc]{\zref@titleref@current}
 %    Later we will redefine the section and caption macros
 %    to catch the current title and remember the value in
 %    \cs{zref@titleref@current}.
 %    \changes{2.38}{2026-09-16}{Use \cs{@currentlabelname} if \cs{DocumentMetadata} is used}
-%    \begin{macro}{\ZREF@NewPropTitle}
+%    \begin{macro}[no-user-doc]{\ZREF@NewPropTitle}
 %    \begin{macrocode}
 \def\ZREF@NewPropTitle{%
   \IfDocumentMetadataTF
@@ -3120,7 +3190,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %    \end{macro}
-%    \begin{macro}{\ZREF@NewPropTheotype}
+%    \begin{macro}[no-user-doc]{\ZREF@NewPropTheotype}
 %    \begin{macrocode}
 \def\ZREF@NewPropTheotype{%
   \zref@newprop{theotype}{}%
@@ -3128,7 +3198,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@NewPropPageValue}
+%    \begin{macro}[no-user-doc]{\ZREF@NewPropPageValue}
 %    \begin{macrocode}
 \def\ZREF@NewPropPageValue{%
   \zref@newprop*{pagevalue}[0]{\number\c@page}%
@@ -3415,7 +3485,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{ZREF@iflastpage}
+%    \begin{macro}[no-user-doc]{\ZREF@iflastpage}
 %    \begin{macrocode}
 \def\ZREF@iflastpage#1{%
   \zref@refused{LastPage}%
@@ -3452,7 +3522,7 @@ the height difference of the two baselines is
 \zref@addprop{thepage}{page}
 \ZREF@NewPropPageValue
 %    \end{macrocode}
-%    \begin{macro}{\zref@thepage@atbegshi@hook}
+%    \begin{macro}[no-user-doc]{\zref@thepage@atbegshi@hook}
 %    \begin{macrocode}
 \let\zref@thepage@atbegshi@hook\ltx@empty
 %    \end{macrocode}
@@ -3756,19 +3826,19 @@ the height difference of the two baselines is
 \zref@addprops{thepage}{outputboxwd,outputboxht,outputboxdp}
 %    \end{macrocode}
 %
-%    \begin{macro}{\ifZREF@pl@list}
+%    \begin{macro}[no-user-doc]{\ifZREF@pl@list}
 %    \begin{macrocode}
 \ltx@newif\ifZREF@pl@list
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\zref@listpagelayout}
+%    \begin{macro}{\zlistpagelayout}
 %    \begin{macrocode}
 \ZREF@IfDefinable\zlistpagelayout\def{%
   {\global\ZREF@pl@listtrue}%
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@pl@AfterLastShipout}
+%    \begin{macro}[no-user-doc]{\ZREF@pl@AfterLastShipout}
 %    \begin{macrocode}
 \def\ZREF@pl@AfterLastShipout{%
   \ifZREF@pl@list
@@ -3788,7 +3858,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@pl@AtVeryEnd}
+%    \begin{macro}[no-user-doc]{\ZREF@pl@AtVeryEnd}
 %    \begin{macrocode}
 \def\ZREF@pl@AtVeryEnd{%
   \begingroup
@@ -3802,7 +3872,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@pl@ListPage}
+%    \begin{macro}[no-user-doc]{\ZREF@pl@ListPage}
 %    \begin{macrocode}
 \def\ZREF@pl@ListPage{%
   \edef\x{%
@@ -3855,7 +3925,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@pl@ListEntry}
+%    \begin{macro}[no-user-doc]{\ZREF@pl@ListEntry}
 %    \begin{macrocode}
 \def\ZREF@pl@ListEntry#1{%
   \zref@ifpropundefined{#1}{%
@@ -3963,19 +4033,20 @@ the height difference of the two baselines is
 \fi
 %    \end{macrocode}
 %
-%    \begin{macro}{\ifZREF@pa@list}
+%    \begin{macro}[no-user-doc]{\ifZREF@pa@list}
 %    \begin{macrocode}
 \ltx@newif\ifZREF@pa@list
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\zref@listpageattr}
+%    \begin{macro}[no-user-doc]{\zlistpageattr}
+%    TODO: perhaps document
 %    \begin{macrocode}
 \ZREF@IfDefinable\zlistpageattr\def{%
   {\ZREF@pa@listtrue}%
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@pa@AfterLastShipout}
+%    \begin{macro}[no-user-doc]{\ZREF@pa@AfterLastShipout}
 %    \begin{macrocode}
 \def\ZREF@pa@AfterLastShipout{%
   \ifZREF@pa@list
@@ -3995,7 +4066,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@pa@AtVeryEnd}
+%    \begin{macro}[no-user-doc]{\ZREF@pa@AtVeryEnd}
 %    \begin{macrocode}
 \let\ZREF@temp=Y%
 \ltx@IfUndefined{pdfpageattr}{}{\let\ZREF@temp=N}
@@ -4025,7 +4096,7 @@ the height difference of the two baselines is
   }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\zref@pageattr}
+%    \begin{macro}{\zref@pdfpageattr}
 %    \begin{macrocode}
 \def\zref@pdfpageattr#1{%
   \zref@unhex{%
@@ -4036,14 +4107,14 @@ the height difference of the two baselines is
 \let\zref@pageattr\zref@pdfpageattr
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\zref@pageattr@used}
+%    \begin{macro}[no-user-doc]{\zref@pageattr@used}
 %    \begin{macrocode}
 \ZREF@Robust\def\zref@pageattr@used#1{%
   \zref@refused{thepage\ZREF@number{#1}}%
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@pa@ListPage}
+%    \begin{macro}[no-user-doc]{\ZREF@pa@ListPage}
 %    \begin{macrocode}
   \def\ZREF@pa@ListPage{%
     \edef\x{%
@@ -4386,7 +4457,7 @@ the height difference of the two baselines is
   }%
 }
 %    \end{macrocode}
-%    \begin{macro}{\ZREF@@perpage@step}
+%    \begin{macro}[no-user-doc]{\ZREF@@perpage@step}
 %    The heart of this module follows.
 %    \begin{macrocode}
 \def\ZREF@@perpage@step#1#2{%
@@ -4498,7 +4569,7 @@ the height difference of the two baselines is
 %    macros such as \cs{label} remain in the string and
 %    can cause problems when using the string in references.
 %
-%    \begin{macro}{\ifzref@titleref@expand}
+%    \begin{macro}[no-user-doc]{\ifzref@titleref@expand}
 %    The switch \cs{ifzref@titleref@expand} distinguishes
 %    between the both methods. Package \xpackage{nameref}'s
 %    behaviour is achieved by setting the switch to false,
@@ -4509,7 +4580,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@titleref@hook}
+%    \begin{macro}[no-user-doc]{\ZREF@titleref@hook}
 %    The hook \cs{ZREF@titleref@hook} allows to extend
 %    the cleanup for the expansion method. Thus
 %    unnecessary macros can be removed or dangerous commands
@@ -4519,9 +4590,9 @@ the height difference of the two baselines is
 \let\ZREF@titleref@hook\ltx@empty
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\zref@titleref@cleanup}
+%    \begin{macro}[no-user-doc]{\zref@titleref@cleanup}
 %    The hook should not be used directly, instead we provide the
-%    macro \cs{zref@titleref@cleanup} to add stuff to the hook
+%    macro \cs{zref@titleref@cleanup} (through a key) to add stuff to the hook
 %    and prevents that a previous non-empty content is not discarded
 %    accidentally.
 %    \begin{macrocode}
@@ -4539,7 +4610,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ifzref@titleref@stripperiod}
+%    \begin{macro}[no-user-doc]{\ifzref@titleref@stripperiod}
 %    Sometimes a title contains a period at the end.
 %    Package \xpackage{nameref} removes this. This behaviour
 %    is controlled by the switch \cs{ifzref@titleref@stripperiod}
@@ -4551,9 +4622,10 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\zref@titleref@setcurrent}
+%    \begin{macro}[no-user-doc]{\zref@titleref@setcurrent}
 %    Macro \cs{zref@titleref@setcurrent} sets a new current title
-%    stored in \cs{zref@titleref@current}. Some cleanup and
+%    stored in \cs{zref@titleref@current} (and with \cs{DocumentMetadata} also in
+%    \cs{@currentlabelname}). Some cleanup and
 %    expansion is performed that can be controlled by the
 %    previous switches.
 %    \changes{2.38}{2026-09-16}{Set \cs{@currentlabelname} if \cs{DocumentMetadata} is used}
@@ -4599,7 +4671,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@stripperiod}
+%    \begin{macro}[no-user-doc]{\ZREF@stripperiod}
 %    If \cs{ZREF@stripperiod} is called, the argument consists of
 %    space tokens and tokens with catcode 12 (other), because
 %    of \hologo{eTeX}'s \cs{detokenize}.
@@ -4942,7 +5014,7 @@ the height difference of the two baselines is
 }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ifZREF@xr@zreflabel}
+%    \begin{macro}[no-user-doc]{\ifZREF@xr@zreflabel}
 %    The use of the star form of \cs{zexternaldocument}
 %    is remembered in the switch \cs{ifZREF@xr@zreflabel}.
 %    \begin{macrocode}
@@ -4970,13 +5042,13 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@xr@URL}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@URL}
 %    \begin{macrocode}
 \newcount\ZREF@xr@URL
 \ZREF@xr@URL=\ltx@zero
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@xr@AddURL}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@AddURL}
 %    \begin{macrocode}
 \def\ZREF@xr@AddURL#1{%
   \begingroup
@@ -4987,7 +5059,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@xr@@AddUrl}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@@AddUrl}
 %    \begin{macrocode}
 \def\ZREF@xr@@AddUrl{%
   \ifnum\count@>\ZREF@xr@URL
@@ -5044,7 +5116,7 @@ the height difference of the two baselines is
 %    happen that the read order of the newlabel commands
 %    differs from \hologo{LaTeX}'s order using \cs{input}.
 %
-%    \begin{macro}{\ZREF@xr@externaldocument}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@externaldocument}
 %    It reads the remaining arguments. \cs{newcommand}
 %    comes in handy for the optional argument.
 %    \begin{macrocode}
@@ -5068,7 +5140,7 @@ the height difference of the two baselines is
 }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@xr@processfile}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@processfile}
 %    We follow \xpackage{xr} here, \cs{IfFileExists} offers
 %    a nicer test, but we have to open the file anyway.
 %    \begin{macrocode}
@@ -5128,7 +5200,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@xr@processfile}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@processfile}
 %    \begin{macrocode}
 \def\ZREF@xr@processfile{%
   \read\@inputcheck to\ZREF@xr@line
@@ -5140,7 +5212,7 @@ the height difference of the two baselines is
 }%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@xr@processline}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@processline}
 %    The most work must be done for analyzing the
 %    arguments of \cs{newlabel}.
 %    \begin{macrocode}
@@ -5257,7 +5329,7 @@ the height difference of the two baselines is
 \def\ZREF@xr@relax{\relax}%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@xr@tolabel}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@tolabel}
 %    \begin{macrocode}
 \def\ZREF@xr@tolabel#1#2{%
   \ifZREF@xr@verbose
@@ -5298,7 +5370,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@xr@zref@ignorewarning}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@zref@ignorewarning}
 %    \begin{macrocode}
 \def\ZREF@xr@zref@ignorewarning#1{%
   \PackageWarningNoLine{zref-xr}{%
@@ -5312,7 +5384,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@xr@ltx@ignorewarning}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@ltx@ignorewarning}
 %    \begin{macrocode}
 \def\ZREF@xr@ltx@ignorewarning#1{%
   \PackageWarningNoLine{zref-xr}{%
@@ -5326,7 +5398,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@xr@checklist}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@checklist}
 %    \begin{macrocode}
 \def\ZREF@xr@checklist#1#2#3\ZREF@nil{%
   \ifx\@undefined#1\relax
@@ -5347,7 +5419,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@xr@scanparams}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@scanparams}
 %    \begin{macrocode}
 \def\ZREF@xr@scanparams#1#2#3#4#5#6#7\ZREF@nil{%
   \let#1\ltx@empty
@@ -5394,7 +5466,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@xr@scantitleref}
+%    \begin{macro}[no-user-doc]{\ZREF@xr@scantitleref}
 %    \begin{macrocode}
 \def\ZREF@xr@scantitleref#1#2\TR@TitleReference#3#4#5\ZREF@nil{%
   \ifx\\#5\\%
@@ -5409,7 +5481,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@xr@urlcheck}%
+%    \begin{macro}[no-user-doc]{\ZREF@xr@urlcheck}%
 %    \begin{macrocode}
 \def\ZREF@xr@urlcheck#1{%
   \zref@ifrefcontainsprop{#1}{anchor}{%
@@ -5506,7 +5578,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@zsavepos}
+%    \begin{macro}[no-user-doc]{\ZREF@zsavepos}
 %    \begin{macrocode}
 \def\ZREF@zsavepos#1#2#3{%
   \@bsphack
@@ -5577,7 +5649,7 @@ the height difference of the two baselines is
 %    used positions by \cs{zrefused}
 %    in order to notify \hologo{LaTeX} about undefined references.
 %
-%    \begin{macro}{\ZREF@savepos@ok}
+%    \begin{macro}[no-user-doc]{\ZREF@savepos@ok}
 %    \begin{macrocode}
 \let\ZREF@savepos@ok=Y
 %    \end{macrocode}
@@ -5659,7 +5731,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@absposnum}
+%    \begin{macro}[no-user-doc]{\ZREF@absposnum}
 %    \begin{macrocode}
 \def\ZREF@absposnum#1#2#3#4{%
   \ltx@ifundefined{ZREF@abspos@#2@#3@#4}{%
@@ -5702,7 +5774,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@def@abspos}
+%    \begin{macro}[no-user-doc]{\ZREF@def@abspos}
 %    \begin{macrocode}
 \def\ZREF@def@absposnumy#1#2#3#4#5{%
   \edef#1{#2{#3}{#4}{#5}}%
@@ -5717,7 +5789,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@used}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@used}
 %    \begin{macrocode}
 \def\ZREF@abspos@used#1{%
   \zref@refused{#1}%
@@ -5791,7 +5863,7 @@ the height difference of the two baselines is
 \@ifundefined{stockheight}{\newdimen\stockheight}{}
 %    \end{macrocode}
 %
-%    \begin{macro}{\ZREF@abspos@media@width}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@media@width}
 %    \begin{macrocode}
 \edef\ZREF@abspos@media@width{%
   \ltx@ifundefined{pdfpagewidth}{%
@@ -5813,7 +5885,7 @@ the height difference of the two baselines is
 \fi
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@media@height}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@media@height}
 %    \begin{macrocode}
 \edef\ZREF@abspos@media@height{%
   \ltx@ifundefined{pdfpageheight}{%
@@ -5853,21 +5925,21 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@abspos@media@x@left}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@media@x@left}
 %    \begin{macrocode}
 \def\ZREF@abspos@media@x@left#1{%
   0%
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@media@x@right}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@media@x@right}
 %    \begin{macrocode}
 \def\ZREF@abspos@media@x@right#1{%
   \zref@extract{#1}\ZREF@abspos@media@width
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@media@x@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@media@x@center}
 %    \begin{macrocode}
 \def\ZREF@abspos@media@x@center#1{%
   \ZREF@abspos@media@x@left{#1}%
@@ -5876,21 +5948,21 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@abspos@media@y@top}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@media@y@top}
 %    \begin{macrocode}
 \def\ZREF@abspos@media@y@top#1{%
   \zref@extract{#1}\ZREF@abspos@media@height
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@media@y@bottom}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@media@y@bottom}
 %    \begin{macrocode}
 \def\ZREF@abspos@media@y@bottom#1{%
   0%
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@media@y@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@media@y@center}
 %    \begin{macrocode}
 \def\ZREF@abspos@media@y@center#1{%
   \zref@extract{#1}\ZREF@abspos@media@height/2%
@@ -5900,21 +5972,21 @@ the height difference of the two baselines is
 %
 % \subsubsection{Paper}
 %
-%    \begin{macro}{\ZREF@abspos@paper@x@left}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@paper@x@left}
 %    \begin{macrocode}
 \def\ZREF@abspos@paper@x@left#1{%
   0%
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@paper@x@right}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@paper@x@right}
 %    \begin{macrocode}
 \def\ZREF@abspos@paper@x@right#1{%
   \zref@extract{#1}{paperwidth}%
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@paper@x@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@paper@x@center}
 %    \begin{macrocode}
 \def\ZREF@abspos@paper@x@center#1{%
   \zref@extract{#1}{paperwidth}/2%
@@ -5922,12 +5994,12 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@abspos@paper@y@top}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@paper@y@top}
 %    \begin{macrocode}
 \let\ZREF@abspos@paper@y@top\ZREF@abspos@media@y@top
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@paper@y@bottom}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@paper@y@bottom}
 %    \begin{macrocode}
 \def\ZREF@abspos@paper@y@bottom#1{%
   \ZREF@abspos@paper@y@top{#1}%
@@ -5935,7 +6007,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@paper@y@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@paper@y@center}
 %    \begin{macrocode}
 \def\ZREF@abspos@paper@y@center#1{%
   \ZREF@abspos@paper@y@top{#1}%
@@ -5948,7 +6020,7 @@ the height difference of the two baselines is
 %
 % There doesn't seem a good reason to make these tests depend on pdf mode
 %  in current engines, so comment out the \verb|\ifpdf| tests.
-%    \begin{macro}{\ZREF@abspos@origin@x}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@origin@x}
 %    \begin{macrocode}
 \let\ZREF@temp\ltx@two
 \ltx@IfUndefined{pdfhorigin}{}{%
@@ -5982,7 +6054,7 @@ the height difference of the two baselines is
 \fi
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@origin@y}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@origin@y}
 %    \begin{macrocode}
 \let\ZREF@temp\ltx@two
 \ltx@IfUndefined{pdfvorigin}{}{%
@@ -6018,7 +6090,7 @@ the height difference of the two baselines is
 %
 % \subsubsection{Header}
 %
-%    \begin{macro}{\ZREF@abspos@head@x@left}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@head@x@left}
 %    \begin{macrocode}
 \def\ZREF@abspos@head@x@left#1{%
   \ZREF@abspos@paper@x@left{#1}%
@@ -6032,7 +6104,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@head@x@right}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@head@x@right}
 %    \begin{macrocode}
 \def\ZREF@abspos@head@x@right#1{%
   \ZREF@abspos@head@x@left{#1}%
@@ -6040,7 +6112,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@head@x@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@head@x@center}
 %    \begin{macrocode}
 \def\ZREF@abspos@head@x@center#1{%
   \ZREF@abspos@head@x@left{#1}%
@@ -6049,7 +6121,7 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@abspos@head@y@top}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@head@y@top}
 %    \begin{macrocode}
 \def\ZREF@abspos@head@y@top#1{%
   \ZREF@abspos@paper@y@top{#1}%
@@ -6059,7 +6131,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@head@y@bottom}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@head@y@bottom}
 %    \begin{macrocode}
 \def\ZREF@abspos@head@y@bottom#1{%
   \ZREF@abspos@head@y@top{#1}%
@@ -6067,7 +6139,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@head@y@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@head@y@center}
 %    \begin{macrocode}
 \def\ZREF@abspos@head@y@center#1{%
   \ZREF@abspos@head@y@top{#1}%
@@ -6078,23 +6150,23 @@ the height difference of the two baselines is
 %
 % \subsubsection{Body}
 %
-%    \begin{macro}{\ZREF@abspos@body@x@left}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@body@x@left}
 %    \begin{macrocode}
 \let\ZREF@abspos@body@x@left\ZREF@abspos@head@x@left
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@body@x@right}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@body@x@right}
 %    \begin{macrocode}
 \let\ZREF@abspos@body@x@right\ZREF@abspos@head@x@right
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@body@x@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@body@x@center}
 %    \begin{macrocode}
 \let\ZREF@abspos@body@x@center\ZREF@abspos@head@x@center
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@abspos@body@y@top}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@body@y@top}
 %    \begin{macrocode}
 \def\ZREF@abspos@body@y@top#1{%
   \ZREF@abspos@head@y@bottom{#1}%
@@ -6102,7 +6174,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@body@y@bottom}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@body@y@bottom}
 %    \begin{macrocode}
 \def\ZREF@abspos@body@y@bottom#1{%
   \ZREF@abspos@body@y@top{#1}%
@@ -6110,7 +6182,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@body@y@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@body@y@center}
 %    \begin{macrocode}
 \def\ZREF@abspos@body@y@center#1{%
   \ZREF@abspos@body@y@top{#1}%
@@ -6121,23 +6193,23 @@ the height difference of the two baselines is
 %
 % \subsubsection{Footer}
 %
-%    \begin{macro}{\ZREF@abspos@foot@x@left}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@foot@x@left}
 %    \begin{macrocode}
 \let\ZREF@abspos@foot@x@left\ZREF@abspos@head@x@left
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@foot@x@right}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@foot@x@right}
 %    \begin{macrocode}
 \let\ZREF@abspos@foot@x@right\ZREF@abspos@head@x@right
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@foot@x@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@foot@x@center}
 %    \begin{macrocode}
 \let\ZREF@abspos@foot@x@center\ZREF@abspos@head@x@center
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@abspos@foot@y@bottom}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@foot@y@bottom}
 %    \begin{macrocode}
 \def\ZREF@abspos@foot@y@bottom#1{%
   \ZREF@abspos@body@y@bottom{#1}%
@@ -6148,7 +6220,7 @@ the height difference of the two baselines is
 %
 % \subsubsection{Marginal notes}
 %
-%    \begin{macro}{\ZREF@abspos@marginpar@x@left}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@marginpar@x@left}
 %    \begin{macrocode}
 \def\ZREF@abspos@marginpar@x@left#1{%
   \ifodd\zref@extractdefault{#1}{pagevalue}{\number\c@page} %
@@ -6162,7 +6234,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@marginpar@x@right}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@marginpar@x@right}
 %    \begin{macrocode}
 \def\ZREF@abspos@marginpar@x@right#1{%
   \ZREF@abspos@marginpar@x@left{#1}%
@@ -6170,7 +6242,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@marginpar@x@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@marginpar@x@center}
 %    \begin{macrocode}
 \def\ZREF@abspos@marginpar@x@center#1{%
   \ZREF@abspos@marginpar@x@left{#1}%
@@ -6179,17 +6251,17 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@abspos@marginpar@y@top}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@marginpar@y@top}
 %    \begin{macrocode}
 \let\ZREF@abspos@marginpar@y@top\ZREF@abspos@body@y@top
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@marginpar@y@bottom}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@marginpar@y@bottom}
 %    \begin{macrocode}
 \let\ZREF@abspos@marginpar@y@bottom\ZREF@abspos@body@y@bottom
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@marginpar@y@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@marginpar@y@center}
 %    \begin{macrocode}
 \let\ZREF@abspos@marginpar@y@center\ZREF@abspos@body@y@center
 %    \end{macrocode}
@@ -6197,33 +6269,33 @@ the height difference of the two baselines is
 %
 % \subsubsection{Stock paper}
 %
-%    \begin{macro}{\ZREF@abspos@stock@x@left}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@stock@x@left}
 %    \begin{macrocode}
 \let\ZREF@abspos@stock@x@left\ZREF@abspos@paper@x@left
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@stock@x@right}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@stock@x@right}
 %    \begin{macrocode}
 \let\ZREF@abspos@stock@x@right\ZREF@abspos@paper@x@right
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@stock@x@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@stock@x@center}
 %    \begin{macrocode}
 \let\ZREF@abspos@stock@x@center\ZREF@abspos@paper@x@center
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{\ZREF@abspos@stock@y@top}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@stock@y@top}
 %    \begin{macrocode}
 \let\ZREF@abspos@stock@y@top\ZREF@abspos@paper@y@top
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@stock@y@bottom}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@stock@y@bottom}
 %    \begin{macrocode}
 \let\ZREF@abspos@stock@y@bottom\ZREF@abspos@paper@y@bottom
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@abspos@stock@y@center}
+%    \begin{macro}[no-user-doc]{\ZREF@abspos@stock@y@center}
 %    \begin{macrocode}
 \let\ZREF@abspos@stock@y@center\ZREF@abspos@paper@y@center
 %    \end{macrocode}
@@ -6321,7 +6393,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@dotfill}
+%    \begin{macro}[no-user-doc]{\ZREF@dotfill}
 %    Help macro that actually sets the dots.
 %    \begin{macrocode}
 \def\ZREF@dotfill{%
@@ -6353,7 +6425,7 @@ the height difference of the two baselines is
 \zref@newprop{envline}[]{\zref@env@line}
 %    \end{macrocode}
 %
-%    \begin{macro}{\zref@env@line}
+%    \begin{macro}[no-user-doc]{\zref@env@line}
 %    Macro \cs{zref@env@line} extracts the line number
 %    from \cs{@currenvline}.
 %    \begin{macrocode}
@@ -6366,7 +6438,7 @@ the height difference of the two baselines is
 }
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macro}{\ZREF@ENV@line}
+%    \begin{macro}[no-user-doc]{\ZREF@ENV@line}
 %    \begin{macrocode}
 \def\ZREF@ENV@line#1line #2\ltx@empty#3\@nil{#2}%
 %    \end{macrocode}
@@ -6402,7 +6474,6 @@ the height difference of the two baselines is
 % the different directories in your installation TDS tree
 % (also known as \xfile{texmf} tree):
 % \begin{quote}
-% \def\t{^^A
 % \begin{tabular}{@{}>{\ttfamily}l@{ \SuspendTagging{}$\rightarrow$\ResumeTagging{} }>{\ttfamily}l@{}}
 %   zref.sty & tex/latex/zref/zref.sty\\
 %   zref-base.sty & tex/latex/zref/zref-base.sty\\
@@ -6430,66 +6501,7 @@ the height difference of the two baselines is
 %   zref-example-lastpage.tex & doc/latex/zref/zref-example-lastpage.tex\\
 %   zref-example-nextpage.tex & doc/latex/zref/zref-example-nextpage.tex\\
 %   zref.dtx & source/latex/zref/zref.dtx\\
-% \end{tabular}^^A
-% }^^A
-% \sbox0{\t}^^A
-% \ifdim\wd0>\linewidth
-%   \begingroup
-%     \advance\linewidth by\leftmargin
-%     \advance\linewidth by\rightmargin
-%   \edef\x{\endgroup
-%     \def\noexpand\lw{\the\linewidth}^^A
-%   }\x
-%   \def\lwbox{^^A
-%     \leavevmode
-%     \hbox to \linewidth{^^A
-%       \kern-\leftmargin\relax
-%       \hss
-%       \usebox0
-%       \hss
-%       \kern-\rightmargin\relax
-%     }^^A
-%   }^^A
-%   \ifdim\wd0>\lw
-%     \sbox0{\small\t}^^A
-%     \ifdim\wd0>\linewidth
-%       \ifdim\wd0>\lw
-%         \sbox0{\footnotesize\t}^^A
-%         \ifdim\wd0>\linewidth
-%           \ifdim\wd0>\lw
-%             \sbox0{\scriptsize\t}^^A
-%             \ifdim\wd0>\linewidth
-%               \ifdim\wd0>\lw
-%                 \sbox0{\tiny\t}^^A
-%                 \ifdim\wd0>\linewidth
-%                   \lwbox
-%                 \else
-%                   \usebox0
-%                 \fi
-%               \else
-%                 \lwbox
-%               \fi
-%             \else
-%               \usebox0
-%             \fi
-%           \else
-%             \lwbox
-%           \fi
-%         \else
-%           \usebox0
-%         \fi
-%       \else
-%         \lwbox
-%       \fi
-%     \else
-%       \usebox0
-%     \fi
-%   \else
-%     \lwbox
-%   \fi
-% \else
-%   \usebox0
-% \fi
+% \end{tabular}
 % \end{quote}
 % If you have a \xfile{docstrip.cfg} that configures and enables \docstrip's
 % TDS installing feature, then some files can already be in the right
