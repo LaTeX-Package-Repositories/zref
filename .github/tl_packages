@@ -50,6 +50,7 @@ collection-basic
         url
 
 # From collection-latexextra
+        alphalph
         bigfoot
         hypdoc
         lastpage
@@ -68,6 +69,7 @@ collection-basic
         memoir
         qstest
         tagpdf
+        xpatch
         zref
         
         
