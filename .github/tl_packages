@@ -1,0 +1,138 @@
+# The test framework itself
+l3build
+
+# this collection looks ok
+collection-basic
+
+# from collection latex:
+        amsmath
+        babel
+        babel-english
+        bigintcalc
+        bookmark
+        carlisle
+        colortbl
+        epstopdf-pkg
+        etexcmds
+        fancyhdr
+        firstaid
+        geometry
+        gettitlestring
+        graphics
+        graphics-cfg
+        hopatch
+        hycolor
+        hyperref
+        intcalc
+        kvdefinekeys
+        kvoptions
+        kvsetkeys        
+        l3kernel
+        l3packages
+        latex
+        latex-bin
+        latex-fonts
+        latex-lab
+        latexconfig
+        letltxmacro
+        ltxcmds
+        ltxmisc
+        mfnfss
+        mptopdf
+        natbib
+        oberdiek
+        pdfescape
+        refcount
+        rerunfilecheck
+        stringenc
+        tools
+        uniquecounter
+        url
+
+# From collection-latexextra
+        hypdoc
+        lastpage
+        latex-amsmath-dev
+        latex-base-dev
+        latex-bin-dev
+        latex-context-ppchtex
+        latex-firstaid-dev
+        latex-graphics-dev
+        latex-lab-dev
+        latex-tools-dev
+        lipsum
+        listing
+        listingsutf8
+        lua-check-hyphen
+        zref
+        
+# from collection-luatex
+        ctablestack
+        lua-ul
+        lua-uni-algos
+        luacode
+        luacolor
+        lualibs
+        luamplib
+        luaotfload
+        luatex85
+        luatexbase
+
+# from collection xetex
+        realscripts
+        xelatex-dev
+        xetex
+        xetexconfig
+
+# from collection-langgerman
+        babel-german
+        dehyph
+        dehyph-exptl
+        hyphen-german
+ 
+# from collection-latexrecommended
+        booktabs
+        caption
+        etoolbox
+        float
+        fontspec
+        hologo
+        index
+        infwarerr
+        l3experimental
+        latexbug
+        listings
+        mathtools
+        microtype
+        parskip
+        pdfmanagement
+        pdfpages
+        pdftexcmds
+        ragged2e
+        setspace
+        textcase
+        translator
+        unicode-math
+        xcolor
+        xkeyval
+
+# other
+pgf 
+psnfss
+tcolorbox
+babel-latin
+hyphen-latin
+lualatex-math
+luamml
+
+# fonts
+amsfonts 
+cm-super
+gnu-freefont
+heuristica
+tex-gyre
+almendra 
+
+
+
+
