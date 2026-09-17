@@ -9,7 +9,8 @@ this project uses date-based 'snapshot' version identifiers.
 ### Changed
   - adapted titleref module to `\DocumentMetadata`
   - documentation is now tagged
-  - removed loading of `atbegshi` and removed `\zref@thepage@atbegshi@hook` in the zref-thepage module.
+  - documented a number of missing commands
+  - removed loading of `atbegshi` and removed `\zref@thepage@atbegshi@hook` in the zref-thepage module
 
 ## [2026-03-07]
 ### Fixed
