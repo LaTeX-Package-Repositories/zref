@@ -8,6 +8,7 @@ this project uses date-based 'snapshot' version identifiers.
 ## [2026-09-16]
 ### Changed
   - adapted titleref module to `\DocumentMetadata`
+  - documentation is now tagged
 
 ## [2026-03-07]
 ### Fixed
