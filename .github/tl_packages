@@ -50,6 +50,7 @@ collection-basic
         url
 
 # From collection-latexextra
+        bigfoot
         hypdoc
         lastpage
         latex-amsmath-dev
@@ -64,7 +65,11 @@ collection-basic
         listing
         listingsutf8
         lua-check-hyphen
+        memoir
+        qstest
+        tagpdf
         zref
+        
         
 # from collection-luatex
         ctablestack

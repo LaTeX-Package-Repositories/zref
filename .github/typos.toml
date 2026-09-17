@@ -9,3 +9,4 @@ extend-exclude=[
 [default.extend-words]
 
 [default.extend-identifiers]
+ist = "ist"
