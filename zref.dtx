@@ -3514,7 +3514,6 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\RequirePackage{atbegshi}[2011/10/05]
 \RequirePackage{zref-abspage}[2019/11/29]
 %    \end{macrocode}
 %    \begin{macrocode}
@@ -3529,11 +3528,8 @@ the height difference of the two baselines is
 %    \end{macro}
 %    \begin{macrocode}
 \zref@addprop{thepage}{pagevalue}
-\AddToHook{shipout/before}{%
-  \AtBeginShipoutAddToBox{%
-    \zref@thepage@atbegshi@hook
+\AddToHook{shipout/foreground}{%
     \zref@labelbylist{thepage\the\value{abspage}}{thepage}%
-  }%
 }
 %    \end{macrocode}
 %    \begin{macro}{\zref@thepage@name}
@@ -6894,6 +6890,8 @@ the height difference of the two baselines is
 %   \item Adapted titleref module to \cs{DocumentMetadata}.
 %   \item Documentation is now tagged.
 %   \item Documented a number of missing commands.
+%   \item Removed \xpackage{atbegshi} and removed \cs{zref@thepage@atbegshi@hook}
+%    in the zref-thepage module.
 %   \end{Version}
 % \end{History}
 %
