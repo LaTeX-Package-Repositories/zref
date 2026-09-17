@@ -10,6 +10,7 @@ installfiles={"*.sty"}
 scriptfiles={"*.lua"}
 
 typesetexe="lualatex"
+typesetruns=4
  
 packtdszip  = false
 
