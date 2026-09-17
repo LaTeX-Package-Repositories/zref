@@ -3528,7 +3528,7 @@ the height difference of the two baselines is
 %    \end{macro}
 %    \begin{macrocode}
 \zref@addprop{thepage}{pagevalue}
-\AddToHook{shipout/foreground}{%
+\AddToHook{shipout/background}{%
     \zref@labelbylist{thepage\the\value{abspage}}{thepage}%
 }
 %    \end{macrocode}
@@ -3806,17 +3806,11 @@ the height difference of the two baselines is
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\IfFormatAtLeastTF{2020/10/01}
- {
-   \zref@newprop*{outputboxwd}[0pt]{\ShipoutBoxWidth}
-   \zref@newprop*{outputboxht}[0pt]{\ShipoutBoxHeight}
-   \zref@newprop*{outputboxdp}[0pt]{\ShipoutBoxDepth}
- }
- {
-   \zref@newprop*{outputboxwd}[0pt]{\AtBeginShipoutBoxWidth}
-   \zref@newprop*{outputboxht}[0pt]{\AtBeginShipoutBoxHeight}
-   \zref@newprop*{outputboxdp}[0pt]{\AtBeginShipoutBoxDepth}
- }
+\ExplSyntaxOn
+\zref@newprop*{outputboxwd}[0pt]{\dim_use:N \l_shipout_box_wd_dim}
+\zref@newprop*{outputboxht}[0pt]{\dim_use:N \l_shipout_box_ht_dim}
+\zref@newprop*{outputboxdp}[0pt]{\dim_use:N \l_shipout_box_dp_dim}
+\ExplSyntaxOff 
 %    \end{macrocode}
 %    \begin{macrocode}
 \zref@addprops{thepage}{outputboxwd,outputboxht,outputboxdp}
