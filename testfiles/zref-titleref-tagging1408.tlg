@@ -11,7 +11,9 @@ Completed box being shipped out [1]
 ..\vbox(0.0+0.0)x0.0, glue set 72.26999fil
 ...\kern -72.26999
 ...\hbox(0.0+0.0)x0.0
+....\pdfrunninglinkoff
 ....\glue 0.0 plus 1.0fil minus 1.0fil
+....\pdfrunninglinkon
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\glue 16.0
 .\vbox(617.0+0.0)x345.0, shifted 62.0
@@ -23,7 +25,7 @@ Completed box being shipped out [1]
 ...\pdfrunninglinkon
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(550.0+0.0)x345.0, glue set 138.97987fil
+..\vbox(550.0+0.0)x345.0, glue set 136.98009fil
 ...\vbox(18.83118+0.0)x345.0
 ....\vbox(18.83118+0.0)x345.0
 .....\special{}
@@ -68,10 +70,13 @@ Completed box being shipped out [1]
 ...\write-{}
 ...\glue(\topskip) 0.06242
 ...\hbox(9.93758+0.0)x345.0, glue set 283.1645fil
+....\write1{\new@label@record{heading*.0}{{pagenum}{\__property_code_pagenum: }}}
+....\glue 0.0
 ....\hbox(0.0+0.0)x0.0
+.....\glue 0.0 plus 1.0fil minus 1.0fil
 .....\hbox(0.0+0.0)x0.0
-.....\penalty 10000
-.....\glue 0.0
+......\hbox(0.0+0.0)x0.0
+......\penalty 10000
 ....\T1/cmr/bx/n/14.4 C
 ....\T1/cmr/bx/n/14.4 o
 ....\T1/cmr/bx/n/14.4 n
@@ -123,10 +128,13 @@ Completed box being shipped out [1]
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 8.06242
 ...\hbox(9.93758+2.7993)x345.0, glue set 244.43018fil
+....\write1{\new@label@record{heading*.1}{{pagenum}{\__property_code_pagenum: }}}
+....\glue 0.0
 ....\hbox(0.0+0.0)x0.0
+.....\glue 0.0 plus 1.0fil minus 1.0fil
 .....\hbox(0.0+0.0)x0.0
-.....\penalty 10000
-.....\glue 0.0
+......\hbox(0.0+0.0)x0.0
+......\penalty 10000
 ....\T1/cmr/bx/n/14.4 L
 ....\T1/cmr/bx/n/14.4 i
 ....\T1/cmr/bx/n/14.4 s
@@ -196,13 +204,17 @@ Completed box being shipped out [1]
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 6.11845
-...\hbox(9.93758+0.0)x345.0, glue set 269.08788fil
-....\hbox(9.20918+0.0)x23.75433
-.....\hbox(0.0+0.0)x0.0
-.....\penalty 10000
-.....\glue 0.0
-.....\T1/cmr/bx/n/14.4 1
-.....\glue 15.83623
+...\hbox(9.93758+0.0)x321.24567, glue set 269.08788fil, shifted 23.75433
+....\write1{\new@label@record{heading*.2}{{pagenum}{\__property_code_pagenum: }}}
+....\glue 0.0
+....\hbox(9.20918+0.0)x0.0, glue set - 23.75433fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(9.20918+0.0)x23.75433
+......\hbox(0.0+0.0)x0.0
+......\penalty 10000
+......\T1/cmr/bx/n/14.4 1
+......\glue 15.83623
+......\pdffakespace
 ....\T1/cmr/bx/n/14.4 s
 ....\T1/cmr/bx/n/14.4 e
 ....\T1/cmr/bx/n/14.4 c
@@ -229,10 +241,13 @@ Completed box being shipped out [1]
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 8.06242
 ...\hbox(9.93758+0.0)x345.0, glue set 238.38718fil
+....\write1{\new@label@record{heading*.3}{{pagenum}{\__property_code_pagenum: }}}
+....\glue 0.0
 ....\hbox(0.0+0.0)x0.0
+.....\glue 0.0 plus 1.0fil minus 1.0fil
 .....\hbox(0.0+0.0)x0.0
-.....\penalty 10000
-.....\glue 0.0
+......\hbox(0.0+0.0)x0.0
+......\penalty 10000
 ....\T1/cmr/bx/n/14.4 s
 ....\T1/cmr/bx/n/14.4 t
 ....\T1/cmr/bx/n/14.4 a
@@ -269,10 +284,10 @@ Completed box being shipped out [1]
 ...\penalty 10000
 ...\penalty 10000
 ...\glue -4.0 plus -1.0 minus -1.0
-...\write1{\zref@newlabel{desc}{\default{1}\page{\Z@C@page }\title{starred section.}}}
+...\write1{\zref@newlabel{desc}{\default{desc}\page{\Z@C@page }\title{desc}}}
 ...\penalty 10000
 ...\penalty 10000
-...\write1{\newlabel{desc}{{1}{\thepage }{starred section.}{target*.5}{}}}
+...\write1{\newlabel{desc}{{desc}{\thepage }{desc}{target*.5}{}}}
 ...\penalty 10000
 ...\penalty 10000
 ...\glue(\parskip) 4.0 plus 2.0 minus 1.0
@@ -296,6 +311,9 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
+...\penalty -51
+...\glue 10.0 plus 3.0 minus 5.0
+...\glue -10.0 plus -3.0 minus -5.0
 ...\penalty -51
 ...\glue 10.0 plus 3.0 minus 5.0
 ...\penalty -50
@@ -378,6 +396,8 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
+...\penalty -51
+...\glue 2.0 plus 1.0 minus 1.0
 ...\penalty -50
 ...\glue 6.0 plus 2.0 minus 2.0
 ...\glue 0.0
@@ -437,16 +457,16 @@ Completed box being shipped out [1]
 ...\penalty 10000
 ...\glue -12.0 plus -4.0 minus -4.0
 ...\glue 12.0 plus 4.0 minus 4.0
-...\write1{\zref@newlabel{thm}{\default{1}\page{\Z@C@page }\title{starred section.}}}
+...\write1{\zref@newlabel{thm}{\default{1}\page{\Z@C@page }\title{thm.}}}
 ...\penalty 10000
 ...\penalty 10000
-...\write1{\newlabel{thm}{{1}{\thepage }{starred section.}{target*.7}{}}}
+...\write1{\newlabel{thm}{{1}{\thepage }{thm.}{target*.7}{}}}
 ...\penalty 10000
 ...\penalty 10000
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 0.9018
-...\hbox(7.49817+2.49939)x345.0, glue set 188.887fil
+...\hbox(7.49817+2.49939)x345.0, glue set 192.08066fil
 ....\glue 0.0
 ....\T1/cmr/bx/n/10 T
 ....\T1/cmr/bx/n/10 h
@@ -456,15 +476,16 @@ Completed box being shipped out [1]
 ....\T1/cmr/bx/n/10 e
 ....\T1/cmr/bx/n/10 m
 ....\glue 3.8324 plus 1.9162 minus 1.27747
+....\pdffakespace
 ....\T1/cmr/bx/n/10 1
 ....\glue 3.8324 plus 1.9162 minus 1.27747
+....\pdffakespace
 ....\T1/cmr/m/n/10 (
 ....\T1/cmr/m/n/10 t
 ....\T1/cmr/m/n/10 h
 ....\T1/cmr/m/n/10 m
 ....\T1/cmr/m/n/10 .
 ....\T1/cmr/m/n/10 )
-....\T1/cmr/bx/n/10 .
 ....\glue 5.0 plus 1.0 minus 1.0
 ....\penalty 0
 ....\T1/cmr/m/it/10 S
@@ -621,29 +642,17 @@ Completed box being shipped out [1]
 ....\penalty -10000
 ....\glue(\rightskip) 0.0
 ...\glue(\baselineskip) 3.16882
-...\hbox(6.8872+0.0)x345.0, glue set 252.57813fil
+...\hbox(6.8872+0.0)x345.0, glue set 301.01074fil
 ....\T1/cmr/m/n/10 d
 ....\T1/cmr/m/n/10 e
 ....\T1/cmr/m/n/10 s
 ....\T1/cmr/m/n/10 c
 ....\T1/cmr/m/n/10 :
 ....\glue 4.44336 plus 3.33252 minus 0.55542
-....\T1/cmr/m/n/10 s
-....\T1/cmr/m/n/10 t
-....\T1/cmr/m/n/10 a
-....\T1/cmr/m/n/10 r
-....\T1/cmr/m/n/10 r
-....\T1/cmr/m/n/10 e
 ....\T1/cmr/m/n/10 d
-....\glue 3.33252 plus 1.66626 minus 1.11084
-....\T1/cmr/m/n/10 s
 ....\T1/cmr/m/n/10 e
+....\T1/cmr/m/n/10 s
 ....\T1/cmr/m/n/10 c
-....\T1/cmr/m/n/10 t
-....\T1/cmr/m/n/10 i
-....\T1/cmr/m/n/10 o
-....\T1/cmr/m/n/10 n
-....\T1/cmr/m/n/10 .
 ....\penalty 10000
 ....\glue 0.0 plus 1.0fil
 ....\penalty -10000
@@ -684,27 +693,15 @@ Completed box being shipped out [1]
 ....\glue(\rightskip) 0.0
 ...\penalty 150
 ...\glue(\baselineskip) 3.16882
-...\hbox(6.8872+0.0)x345.0, glue set 253.18909fil
+...\hbox(6.8872+0.0)x345.0, glue set 299.45557fil
 ....\T1/cmr/m/n/10 t
 ....\T1/cmr/m/n/10 h
 ....\T1/cmr/m/n/10 m
 ....\T1/cmr/m/n/10 :
 ....\glue 4.44336 plus 3.33252 minus 0.55542
-....\T1/cmr/m/n/10 s
 ....\T1/cmr/m/n/10 t
-....\T1/cmr/m/n/10 a
-....\T1/cmr/m/n/10 r
-....\T1/cmr/m/n/10 r
-....\T1/cmr/m/n/10 e
-....\T1/cmr/m/n/10 d
-....\glue 3.33252 plus 1.66626 minus 1.11084
-....\T1/cmr/m/n/10 s
-....\T1/cmr/m/n/10 e
-....\T1/cmr/m/n/10 c
-....\T1/cmr/m/n/10 t
-....\T1/cmr/m/n/10 i
-....\T1/cmr/m/n/10 o
-....\T1/cmr/m/n/10 n
+....\T1/cmr/m/n/10 h
+....\T1/cmr/m/n/10 m
 ....\T1/cmr/m/n/10 .
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
